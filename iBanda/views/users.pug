@@ -1,0 +1,21 @@
+extends layout
+block content
+  .w3-container
+    h1.w3-teal Utilizadores:
+    table.w3-table-all
+        each user in users
+            tr
+                th E-Mail
+                td= user.email
+            tr
+                th Password
+                td= user.password
+            tr 
+                th Username
+                td= user.username
+            tr 
+                th Name
+                td= user.name
+            tr 
+                th Role
+                td= user.role
