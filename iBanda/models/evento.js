@@ -7,12 +7,12 @@ var HorarioSchema = new Schema({
 })
 
 var EventoSchema = new Schema({
-    Data : String,
-    Horario : HorarioSchema,
-    Tipo : String,
-    Designacao : String,
-    Local : String,
-    Informacoes : String
+    data : String,
+    horario : HorarioSchema,
+    tipo : String,
+    designacao : String,
+    local : String,
+    informacoes : String
 })
 
 module.exports = mongoose.model('Evento', EventoSchema, 'evento');

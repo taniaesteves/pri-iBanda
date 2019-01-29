@@ -54,20 +54,17 @@ passport.use('login', new localStrategy({
 passport.use('jwt', new JWTstrategy({
     secretOrKey: 'iBandaSecret2',
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken()
-}, async (token, done) => {    
-    console.log("jwt - token: ", token)
+}, async (token, done) => {        
     if (token == null) {
         console.log("Erro de autenticação: Token inválido")
         return done("Erro de autenticação: Token inválido")
     } 
     user = await UserModel.findById(token.user.id)
-    console.log("jwt - user: " +user )
     if(!user) return done(null, false, {message: 'Utilizador não encontrado!'})
     return done(null, user)
 }))
 
 module.exports.checkBasicAuthentication = (req, res, next) => {
-    console.log("token: " + JSON.stringify(req.headers.authorization))
     passport.authenticate('jwt', { session : false}, 
         async function(err, user, info) {
             const error = new Error("Registo do utilizador: Parametros inválidos")

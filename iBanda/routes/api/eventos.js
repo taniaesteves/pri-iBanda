@@ -33,6 +33,7 @@ router.get('/dataEx/:d', function(req, res) {
 });
 
 router.post('/', function(req, res) {
+    // console.log("eventos: " + JSON.stringify(req.body))
     Evento.inserir(req.body)
         .then(dados => res.jsonp(dados))
         .catch(erro => res.status(500).send('Erro na listagem: ' + erro))

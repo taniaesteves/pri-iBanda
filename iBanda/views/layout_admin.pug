@@ -1,0 +1,484 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title iBanda - Dashboard
+    link(href='/stylesheets/bootstrap.min.css', rel='stylesheet')
+    link(href='/stylesheets/font-awesome.min.css', rel='stylesheet')
+    link(href='/stylesheets/datepicker3.css', rel='stylesheet')
+    link(href='/stylesheets/styles.css', rel='stylesheet')
+    // Custom Font
+    link(href='https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i', rel='stylesheet')
+    //if lt IE 9
+      script(src='/javascripts/html5shiv.js')
+      script(src='/javascripts/respond.min.js')
+  body
+    nav.navbar.navbar-custom.navbar-fixed-top(role='navigation')
+      .container-fluid
+        .navbar-header
+          button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#sidebar-collapse')
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href='#')
+            span iBanda
+            | Admin
+          ul.nav.navbar-top-links.navbar-right
+            li.dropdown
+              a.dropdown-toggle.count-info(data-toggle='dropdown', href='#')
+                em.fa.fa-envelope
+                span.label.label-danger 15
+              ul.dropdown-menu.dropdown-messages
+                li
+                  .dropdown-messages-box
+                    a.pull-left(href='profile.html')
+                      img.img-circle(alt='image', src='http://placehold.it/40/30a5ff/fff')
+                    .message-body
+                      small.pull-right 3 mins ago
+                      a(href='#')
+                        strong John Doe
+                        |  commented on 
+                        strong your photo
+                        | .
+                      br
+                      small.text-muted 1:24 pm - 25/03/2015
+                li.divider
+                li
+                  .dropdown-messages-box
+                    a.pull-left(href='profile.html')
+                      img.img-circle(alt='image', src='http://placehold.it/40/30a5ff/fff')
+                    .message-body
+                      small.pull-right 1 hour ago
+                      a(href='#')
+                        | New message from 
+                        strong Jane Doe
+                        | .
+                      br
+                      small.text-muted 12:27 pm - 25/03/2015
+                li.divider
+                li
+                  .all-button
+                    a(href='#')
+                      em.fa.fa-inbox
+                      strong All Messages
+            li.dropdown
+              a.dropdown-toggle.count-info(data-toggle='dropdown', href='#')
+                em.fa.fa-bell
+                span.label.label-info 5
+              ul.dropdown-menu.dropdown-alerts
+                li
+                  a(href='#')
+                    div
+                      em.fa.fa-envelope
+                      |  1 New Message
+                      span.pull-right.text-muted.small 3 mins ago
+                li.divider
+                li
+                  a(href='#')
+                    div
+                      em.fa.fa-heart
+                      |  12 New Likes
+                      span.pull-right.text-muted.small 4 mins ago
+                li.divider
+                li
+                  a(href='#')
+                    div
+                      em.fa.fa-user
+                      |  5 New Followers
+                      span.pull-right.text-muted.small 4 mins ago
+      // /.container-fluid
+    #sidebar-collapse.col-sm-3.col-lg-2.sidebar
+      .profile-sidebar
+        .profile-userpic
+          img.img-responsive(src='http://placehold.it/50/30a5ff/fff', alt='')
+        .profile-usertitle
+          .profile-usertitle-name Username
+          .profile-usertitle-status
+            span.indicator.label-success
+            | Online
+        .clear
+      .divider
+      form(role='search')
+        .form-group
+          input.form-control(type='text', placeholder='Search')
+      ul.nav.menu
+        li.active
+          a(href='index.html')
+            em.fa.fa-dashboard  
+            |  Dashboard
+        //- li
+        //-   a(href='widgets.html')
+        //-     em.fa.fa-calendar  
+        //-     |  Widgets
+        li
+          a(href='charts.html')
+            em.fa.fa-bar-chart  
+            |  Charts
+        //- li
+        //-   a(href='elements.html')
+        //-     em.fa.fa-toggle-off  
+        //-     |  UI Elements
+        //- li
+        //-   a(href='panels.html')
+        //-     em.fa.fa-clone  
+        //-     |  Alerts & Panels
+        //- li.parent
+        //-   a(data-toggle='collapse', href='#sub-item-1')
+        //-     em.fa.fa-navicon  
+        //-     |  Multilevel 
+        //-     span.icon.pull-right(data-toggle='collapse', href='#sub-item-1')
+        //-       em.fa.fa-plus
+        //-   ul#sub-item-1.children.collapse
+        //-     li
+        //-       a(href='#')
+        //-         span.fa.fa-arrow-right  
+        //-         |  Sub Item 1
+        //-     li
+        //-       a(href='#')
+        //-         span.fa.fa-arrow-right  
+        //-         |  Sub Item 2
+        //-     li
+        //-       a(href='#')
+        //-         span.fa.fa-arrow-right  
+        //-         |  Sub Item 3
+        li
+          a(href='login.html')
+            em.fa.fa-power-off  
+            |  Logout
+    // /.sidebar
+    .col-sm-9.col-sm-offset-3.col-lg-10.col-lg-offset-2.main
+      .row
+        ol.breadcrumb
+          li
+            a(href='#')
+              em.fa.fa-home
+          li.active Dashboard
+      // /.row
+      .row
+        .col-lg-12
+          h1.page-header Dashboard
+      // /.row
+      .panel.panel-container
+        .row
+          .col-xs-6.col-md-3.col-lg-3.no-padding
+            .panel.panel-teal.panel-widget.border-right
+              .row.no-padding
+                em.fa.fa-xl.fa-shopping-cart.color-blue
+                .large 120
+                .text-muted New Orders
+          .col-xs-6.col-md-3.col-lg-3.no-padding
+            .panel.panel-blue.panel-widget.border-right
+              .row.no-padding
+                em.fa.fa-xl.fa-comments.color-orange
+                .large 52
+                .text-muted Comments
+          .col-xs-6.col-md-3.col-lg-3.no-padding
+            .panel.panel-orange.panel-widget.border-right
+              .row.no-padding
+                em.fa.fa-xl.fa-users.color-teal
+                .large 24
+                .text-muted New Users
+          .col-xs-6.col-md-3.col-lg-3.no-padding
+            .panel.panel-red.panel-widget
+              .row.no-padding
+                em.fa.fa-xl.fa-search.color-red
+                .large 25.2k
+                .text-muted Page Views
+        // /.row
+      .row
+        .col-md-12
+          .panel.panel-default
+            .panel-heading
+              | Site Traffic Overview
+              ul.pull-right.panel-settings.panel-button-tab-right
+                li.dropdown
+                  a.pull-right.dropdown-toggle(data-toggle='dropdown', href='#')
+                    em.fa.fa-cogs
+                  ul.dropdown-menu.dropdown-menu-right
+                    li
+                      ul.dropdown-settings
+                        li
+                          a(href='#')
+                            em.fa.fa-cog
+                            |  Settings 1
+                        li.divider
+                        li
+                          a(href='#')
+                            em.fa.fa-cog
+                            |  Settings 2
+                        li.divider
+                        li
+                          a(href='#')
+                            em.fa.fa-cog
+                            |  Settings 3
+              span.pull-right.clickable.panel-toggle.panel-button-tab-left
+                em.fa.fa-toggle-up
+            .panel-body
+              .canvas-wrapper
+                canvas#lineChartDemo.main-chart(height='200', width='1000')
+      // /.row
+      .row
+        .col-xs-6.col-md-3
+          .panel.panel-default
+            .panel-body.easypiechart-panel
+              h4 New Orders
+              #easypiechart-blue.easypiechart(data-percent='92')
+                span.percent 92%
+        .col-xs-6.col-md-3
+          .panel.panel-default
+            .panel-body.easypiechart-panel
+              h4 Comments
+              #easypiechart-orange.easypiechart(data-percent='65')
+                span.percent 65%
+        .col-xs-6.col-md-3
+          .panel.panel-default
+            .panel-body.easypiechart-panel
+              h4 New Users
+              #easypiechart-teal.easypiechart(data-percent='56')
+                span.percent 56%
+        .col-xs-6.col-md-3
+          .panel.panel-default
+            .panel-body.easypiechart-panel
+              h4 Visitors
+              #easypiechart-red.easypiechart(data-percent='27')
+                span.percent 27%
+      // /.row
+      .row
+        .col-md-6
+        //-   .panel.panel-default.chat
+        //-     .panel-heading
+        //-       | Chat
+        //-       ul.pull-right.panel-settings.panel-button-tab-right
+        //-         li.dropdown
+        //-           a.pull-right.dropdown-toggle(data-toggle='dropdown', href='#')
+        //-             em.fa.fa-cogs
+        //-           ul.dropdown-menu.dropdown-menu-right
+        //-             li
+        //-               ul.dropdown-settings
+        //-                 li
+        //-                   a(href='#')
+        //-                     em.fa.fa-cog
+        //-                     |  Settings 1
+        //-                 li.divider
+        //-                 li
+        //-                   a(href='#')
+        //-                     em.fa.fa-cog
+        //-                     |  Settings 2
+        //-                 li.divider
+        //-                 li
+        //-                   a(href='#')
+        //-                     em.fa.fa-cog
+        //-                     |  Settings 3
+        //-       span.pull-right.clickable.panel-toggle.panel-button-tab-left
+        //-         em.fa.fa-toggle-up
+        //-     .panel-body
+        //-       ul
+        //-         li.left.clearfix
+        //-           span.chat-img.pull-left
+        //-             img.img-circle(src='http://placehold.it/60/30a5ff/fff', alt='User Avatar')
+        //-           .chat-body.clearfix
+        //-             .header
+        //-               strong.primary-font John Doe
+        //-               small.text-muted 32 mins ago
+        //-             p
+        //-               | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ante turpis, rutrum ut ullamcorper sed, dapibus ac nunc.
+        //-         li.right.clearfix
+        //-           span.chat-img.pull-right
+        //-             img.img-circle(src='http://placehold.it/60/dde0e6/5f6468', alt='User Avatar')
+        //-           .chat-body.clearfix
+        //-             .header
+        //-               strong.pull-left.primary-font Jane Doe
+        //-               small.text-muted 6 mins ago
+        //-             p
+        //-               | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ante turpis, rutrum ut ullamcorper sed, dapibus ac nunc.
+        //-         li.left.clearfix
+        //-           span.chat-img.pull-left
+        //-             img.img-circle(src='http://placehold.it/60/30a5ff/fff', alt='User Avatar')
+        //-           .chat-body.clearfix
+        //-             .header
+        //-               strong.primary-font John Doe
+        //-               small.text-muted 32 mins ago
+        //-             p
+        //-               | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ante turpis, rutrum ut ullamcorper sed, dapibus ac nunc.
+        //-     .panel-footer
+        //-       .input-group
+        //-         input#btn-input.form-control.input-md(type='text', placeholder='Type your message here...')
+        //-         span.input-group-btn
+        //-           button#btn-chat.btn.btn-primary.btn-md Send
+        //-   .panel.panel-default
+        //-     .panel-heading
+        //-       | To-do List
+        //-       ul.pull-right.panel-settings.panel-button-tab-right
+        //-         li.dropdown
+        //-           a.pull-right.dropdown-toggle(data-toggle='dropdown', href='#')
+        //-             em.fa.fa-cogs
+        //-           ul.dropdown-menu.dropdown-menu-right
+        //-             li
+        //-               ul.dropdown-settings
+        //-                 li
+        //-                   a(href='#')
+        //-                     em.fa.fa-cog
+        //-                     |  Settings 1
+        //-                 li.divider
+        //-                 li
+        //-                   a(href='#')
+        //-                     em.fa.fa-cog
+        //-                     |  Settings 2
+        //-                 li.divider
+        //-                 li
+        //-                   a(href='#')
+        //-                     em.fa.fa-cog
+        //-                     |  Settings 3
+        //-       span.pull-right.clickable.panel-toggle.panel-button-tab-left
+        //-         em.fa.fa-toggle-up
+        //-     .panel-body
+        //-       ul.todo-list
+        //-         li.todo-list-item
+        //-           .checkbox
+        //-             input#checkbox-1(type='checkbox')
+        //-             label(for='checkbox-1') Make coffee
+        //-           .pull-right.action-buttons
+        //-             a.trash(href='#')
+        //-               em.fa.fa-trash
+        //-         li.todo-list-item
+        //-           .checkbox
+        //-             input#checkbox-2(type='checkbox')
+        //-             label(for='checkbox-2') Check emails
+        //-           .pull-right.action-buttons
+        //-             a.trash(href='#')
+        //-               em.fa.fa-trash
+        //-         li.todo-list-item
+        //-           .checkbox
+        //-             input#checkbox-3(type='checkbox')
+        //-             label(for='checkbox-3') Reply to Jane
+        //-           .pull-right.action-buttons
+        //-             a.trash(href='#')
+        //-               em.fa.fa-trash
+        //-         li.todo-list-item
+        //-           .checkbox
+        //-             input#checkbox-4(type='checkbox')
+        //-             label(for='checkbox-4') Make more coffee
+        //-           .pull-right.action-buttons
+        //-             a.trash(href='#')
+        //-               em.fa.fa-trash
+        //-         li.todo-list-item
+        //-           .checkbox
+        //-             input#checkbox-5(type='checkbox')
+        //-             label(for='checkbox-5') Work on the new design
+        //-           .pull-right.action-buttons
+        //-             a.trash(href='#')
+        //-               em.fa.fa-trash
+        //-         li.todo-list-item
+        //-           .checkbox
+        //-             input#checkbox-6(type='checkbox')
+        //-             label(for='checkbox-6') Get feedback on design
+        //-           .pull-right.action-buttons
+        //-             a.trash(href='#')
+        //-               em.fa.fa-trash
+        //-     .panel-footer
+        //-       .input-group
+        //-         input#btn-input.form-control.input-md(type='text', placeholder='Add new task')
+        //-         span.input-group-btn
+        //-           button#btn-todo.btn.btn-primary.btn-md Add
+        // /.col
+        .col-md-12
+          .panel.panel-default
+            .panel-heading
+              | Timeline
+              ul.pull-right.panel-settings.panel-button-tab-right
+                li.dropdown
+                  a.pull-right.dropdown-toggle(data-toggle='dropdown', href='#')
+                    em.fa.fa-cogs
+                  ul.dropdown-menu.dropdown-menu-right
+                    li
+                      ul.dropdown-settings
+                        li
+                          a(href='#')
+                            em.fa.fa-cog
+                            |  Settings 1
+                        li.divider
+                        li
+                          a(href='#')
+                            em.fa.fa-cog
+                            |  Settings 2
+                        li.divider
+                        li
+                          a(href='#')
+                            em.fa.fa-cog
+                            |  Settings 3
+              span.pull-right.clickable.panel-toggle.panel-button-tab-left
+                em.fa.fa-toggle-up
+            .panel-body.timeline-container
+              ul.timeline
+                li
+                  .timeline-badge
+                    em.glyphicon.glyphicon-pushpin
+                  .timeline-panel
+                    .timeline-heading
+                      h4.timeline-title Lorem ipsum dolor sit amet
+                    .timeline-body
+                      p
+                        | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at sodales nisl. Donec malesuada orci ornare risus finibus feugiat.
+                li
+                  .timeline-badge.primary
+                    em.glyphicon.glyphicon-link
+                  .timeline-panel
+                    .timeline-heading
+                      h4.timeline-title Lorem ipsum dolor sit amet
+                    .timeline-body
+                      p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                li
+                  .timeline-badge
+                    em.glyphicon.glyphicon-camera
+                  .timeline-panel
+                    .timeline-heading
+                      h4.timeline-title Lorem ipsum dolor sit amet
+                    .timeline-body
+                      p
+                        | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at sodales nisl. Donec malesuada orci ornare risus finibus feugiat.
+                li
+                  .timeline-badge
+                    em.glyphicon.glyphicon-paperclip
+                  .timeline-panel
+                    .timeline-heading
+                      h4.timeline-title Lorem ipsum dolor sit amet
+                    .timeline-body
+                      p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        // /.col
+        .col-sm-12
+          p.back-link
+            | iBanda Theme by 
+            a(href='https://www.medialoot.com') Medialoot
+      // /.row
+      // /.main
+      script(src='/javascripts/jquery-1.11.1.min.js')
+      script(src='/javascripts/bootstrap.min.js')
+      script(src='/javascripts/chart.min.js')
+      script(src='/javascripts/chart-data.js')
+      script(src='/javascripts/easypiechart.js')
+      script(src='/javascripts/easypiechart-data.js')
+      script(src='/javascripts/bootstrap-datepicker.js')
+      script(src='/javascripts/custom.js')
+      script.
+        var testObj = !{testObj};
+        
+
+        window.onload = function () {
+            var ctxl = $("#lineChartDemo").get(0).getContext("2d");		
+            var lineChart = new Chart(ctxl).Line(testObj.data, {
+            responsive: true,
+            scaleLineColor: "rgba(0,0,0,.2)",
+            scaleGridLineColor: "rgba(0,0,0,.05)",
+            scaleFontColor: "#c5c7cc"
+            });
+
+        //- var chart1 = document.getElementById("lineChartDemo").getContext("2d");
+        //- window.myLine = new Chart(chart1).Line(lineChartData, {
+        //- responsive: true,
+        //- scaleLineColor: "rgba(0,0,0,.2)",
+        //- scaleGridLineColor: "rgba(0,0,0,.05)",
+        //- scaleFontColor: "#c5c7cc"
+        //- });
+        };

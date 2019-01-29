@@ -23,9 +23,9 @@ router.get('/:username', (req, res) => {
 	req.session.redirectTo = "/users/"+req.params.username;	
 	axios.get('http://localhost:3000/api/users/user/' + req.params.username, { headers: { "Authorization": 'Bearer ' + req.session.token } })
 		.then(user => {
-			res.send(user.data)
+			// res.send(user.data)
 			delete req.session.redirectTo
-			// res.render('users', {users: users.data})
+			res.render('user', {user: user.data})
 		})
 		.catch(erro => {
 			if (erro.response.status) return res.redirect('/login')

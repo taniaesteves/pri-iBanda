@@ -2,21 +2,27 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-
 var passport = require('passport');
 var mongoose = require('mongoose');
 var uuid = require('uuid/v4')
+var fs = require('fs')
 var session = require('express-session')
 var FileStore = require('session-file-store')(session);
 var flash = require('express-flash')
-const cors = require('cors');
+const morgan = require('morgan');
+
+
+
+// const cors = require('cors');
+const addRequestId = require('express-request-id')();
 
 require('./authentication/aut')
 
+var eventosAPIRouter = require('./routes/api/eventos');
 var usersAPIRouter = require('./routes/api/users');
 var adminAPIRouter = require('./routes/api/admin');
 var indexRouter = require('./routes/index');
+var eventosRouter = require('./routes/eventos');
 var usersRouter = require('./routes/users');
 var adminRouter = require('./routes/admin');
 
@@ -49,26 +55,54 @@ app.use(function(req, res, next){
 app.use(passport.initialize())
 app.use(passport.session())
 
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(logger('dev'));
 app.use(flash())
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(cors({
-  origin: 'http://localhost:3000',
-  credentials: true
-}));
+// app.use(cors({
+//   origin: 'http://localhost:3000',
+//   credentials: true
+// }));
 
-app.use('/api/users', usersAPIRouter)
-app.use('/api/admin', adminAPIRouter)
 app.use('/', indexRouter);
+app.use('/eventos', eventosRouter);
 app.use('/users', usersRouter);
 app.use('/admin', adminRouter)
+
+app.use(addRequestId);
+
+morgan.token('id', function getId(req) {  
+  return req.id
+});
+
+var loggerFormat = ':id;[:date[web]];:method;:url;:status;:response-time';
+
+app.use(morgan(loggerFormat, {
+  skip: function (req, res) {
+      return res.statusCode < 400
+  },
+  stream: process.stderr
+}));
+
+app.use(morgan(loggerFormat, {
+  skip: function (req, res) {
+      return res.statusCode >= 400
+  },
+  // stream: process.stdout
+  stream: fs.createWriteStream('./Logs/access.log', {flags: 'a'})
+}));
+
+
+app.use('/api/eventos', eventosAPIRouter)
+app.use('/api/users', usersAPIRouter)
+app.use('/api/admin', adminAPIRouter)
+
 
 
 // catch 404 and forward to error handler

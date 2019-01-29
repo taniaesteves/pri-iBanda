@@ -3,6 +3,7 @@ var router = express.Router();
 var axios = require('axios')
 
 router.get('/', function(req, res) {
+    console.log("eventos")
     axios.get('http://localhost:3000/api/eventos')
         .then(eventos => res.render('createEvento', {eventos: eventos.data}))
         .catch(erro => {

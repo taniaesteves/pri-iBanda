@@ -1,22 +1,73 @@
-extends layout
-block content
-  .w3-container
-    .w3-card-4
-      header.w3-teal.w3-container
-        h3 SIGN UP
-      .w3-container        
-        form.w3-container(method="POST" action="/signup")
-          input.w3-input(type="text" name="email" placeholder="E-Mail", required)
-          input.w3-input(type="text" name="password" placeholder="password", required)    
-          input.w3-input(type="text" name="username" placeholder="Username", required)
-          input.w3-input(type="text" name="name" placeholder="Name", required)          
-          input.w3-btn.w3-teal(type="submit" value="signup")
-        
-        if expressFlash.length > 0
-          p <strong>FLASH!</strong> #{ expressFlash }
+doctype html
+html(lang='en')
+  head
+    title Login V8
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    // ===============================================================================================
+    link(rel='icon', type='image/png', href='images/icons/favicon.ico')
+    // ===============================================================================================
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', href='fonts/font-awesome-4.7.0/css/font-awesome.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', href='/stylesheets/animate.css')
+    // ===============================================================================================
+    link(rel='stylesheet', href='/stylesheets/hamburgers.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', href='/stylesheets/animsition.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', href='/stylesheets/select2.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', href='/stylesheets/daterangepicker.css')
+    // ===============================================================================================
+    link(rel='stylesheet', href='/stylesheets/util.css')
+    link(rel='stylesheet', href='/stylesheets/login.css')
+    // ===============================================================================================
+  body
+    .limiter
+      .container-login100
+        .wrap-login100
+          form.login100-form.validate-form.p-l-55.p-r-55.p-t-178(method="POST" action="/signup")
+            span.login100-form-title
+              | Sign Up
+            .wrap-input100.validate-input.m-b-16(data-validate='Please enter email')
+              input.input100(type='text', name='email', placeholder='Email')
+              span.focus-input100
+            .wrap-input100.validate-input.m-b-16(data-validate='Please enter username')
+              input.input100(type='text', name='username', placeholder='Username')
+              span.focus-input100
+            .wrap-input100.validate-input.m-b-16(data-validate='Please enter your name')
+              input.input100(type='text', name='name', placeholder='Name')
+              span.focus-input100
+            .wrap-input100.validate-input.m-b-16(data-validate='Please enter password')
+              input.input100(type='password', name='password', placeholder='Password')
+              span.focus-input100
+            .wrap-input100.validate-input.m-b-16(data-validate='Please confirm the password')
+              input.input100(type='password', name='password2', placeholder='Confirm Password')
+              span.focus-input100
 
-        if sessionFlash && sessionFlash.message
-            div(class=sessionFlash.type)
-                p <strong>FLASH!</strong> #{ sessionFlash.message }
-        
-
+            .container-login100-form-btn
+              button.login100-form-btn.m-b-16(type="submit" value="signup")
+                | Sign Up
+            //- .flex-col-c.p-t-170.p-b-40
+            //-   span.txt1.p-b-9
+            //-     | Don’t have an account?
+            //-   a.txt3(href='/signup')
+            //-     | Sign up now
+    // ===============================================================================================
+    script(src='/javascripts/jquery-3.2.1.min.js')
+    // ===============================================================================================
+    script(src='/javascripts/animsition.min.js')
+    // ===============================================================================================
+    script(src='/javascripts/popper.js')
+    script(src='/javascripts/bootstrap.min.js')
+    // ===============================================================================================
+    script(src='/javascripts/select2.min.js')
+    // ===============================================================================================
+    script(src='/javascripts/moment.min.js')
+    script(src='/javascripts/daterangepicker.js')
+    // ===============================================================================================
+    script(src='/javascripts/countdowntime.js')
+    // ===============================================================================================
+    script(src='/javascripts/login.js')
