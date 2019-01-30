@@ -4,9 +4,9 @@ module.exports.create = noticia =>{
     return Noticia.create(noticia)
 }
 
-module.exports.edit = id =>{
+module.exports.edit = (id, field) =>{
     return Noticia
-        .update({_id: id},{$set :{token :12345}}) //o campo token é o campo que se pretende alterar
+        .updateOne({_id: id},{$set : field}) //o campo token é o campo que se pretende alterar
         .exec()    
 }
 

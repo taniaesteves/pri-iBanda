@@ -19,10 +19,12 @@ const addRequestId = require('express-request-id')();
 require('./authentication/aut')
 
 var eventosAPIRouter = require('./routes/api/eventos');
+var noticiasAPIRouter = require('./routes/api/noticias');
 var usersAPIRouter = require('./routes/api/users');
 var adminAPIRouter = require('./routes/api/admin');
 var indexRouter = require('./routes/index');
 var eventosRouter = require('./routes/eventos');
+var noticiasRouter = require('./routes/noticias');
 var usersRouter = require('./routes/users');
 var adminRouter = require('./routes/admin');
 
@@ -73,6 +75,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/eventos', eventosRouter);
 app.use('/users', usersRouter);
+app.use('/noticia', noticiasRouter);
 app.use('/admin', adminRouter)
 
 app.use(addRequestId);
@@ -100,6 +103,7 @@ app.use(morgan(loggerFormat, {
 
 
 app.use('/api/eventos', eventosAPIRouter)
+app.use('/api/noticias', noticiasAPIRouter)
 app.use('/api/users', usersAPIRouter)
 app.use('/api/admin', adminAPIRouter)
 

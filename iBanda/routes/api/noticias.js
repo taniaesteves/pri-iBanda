@@ -27,8 +27,16 @@ router.post('/', function(req, res) {
 });
 
 router.post('/edit/:id', function(req, res) {
-    Noticia.edit(req.params.id)
+    fields = {}
+    if (req.body.titulo) fields.titulo = req.body.titulo;
+    if (req.body.texto)  fields.texto = req.body.texto;
+    if (req.body.data)   fields.data = req.body.data;
+    if (req.body.autor)  fields.autor = req.body.autor;
+
+    Noticia.edit(req.params.id, fields)
         .then(dados => res.jsonp(dados))
         .catch(erro => res.status(500).send('Erro na criação: ' + erro))
 });
 
+
+module.exports = router;

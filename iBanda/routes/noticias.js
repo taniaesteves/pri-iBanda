@@ -47,3 +47,5 @@ router.post('/', function(req, res) {
             res.render('error', {error: erro, message: "Meu erro ins..."})
         })
 });
+
+module.exports = router;

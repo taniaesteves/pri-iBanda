@@ -4,7 +4,16 @@ var axios = require('axios')
 
 /* GET home page. */
 router.get('/', function (req, res) {	
-	res.send('iBanda Home Page')
+	// res.send('iBanda Home Page')
+	axios.get('http://localhost:3000/api/noticias/', { headers: { "Authorization": 'Bearer ' + req.session.token } })
+	.then(data => {
+		res.render('index', {noticias: data.data})
+	})
+	.catch(erro => {
+		console.log("POST /login Erro no login do utilizador! " + JSON.stringify(erro.response.data.info));
+		req.flash('error', erro.response.data.info)
+		// res.redirect(301, '/login');
+	})
 });
 
 router.get('/login', function (req, res) {	
