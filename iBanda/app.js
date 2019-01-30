@@ -39,7 +39,7 @@ app.use(session({
     return uuid()},
   store: new FileStore(),
   secret: 'O meu segredo',
-  resave: true,
+  resave: false,
   saveUninitialized: true
 }))
 

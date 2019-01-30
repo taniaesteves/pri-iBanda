@@ -28,43 +28,6 @@ html
           ul.nav.navbar-top-links.navbar-right
             li.dropdown
               a.dropdown-toggle.count-info(data-toggle='dropdown', href='#')
-                em.fa.fa-envelope
-                span.label.label-danger 15
-              ul.dropdown-menu.dropdown-messages
-                li
-                  .dropdown-messages-box
-                    a.pull-left(href='profile.html')
-                      img.img-circle(alt='image', src='http://placehold.it/40/30a5ff/fff')
-                    .message-body
-                      small.pull-right 3 mins ago
-                      a(href='#')
-                        strong John Doe
-                        |  commented on 
-                        strong your photo
-                        | .
-                      br
-                      small.text-muted 1:24 pm - 25/03/2015
-                li.divider
-                li
-                  .dropdown-messages-box
-                    a.pull-left(href='profile.html')
-                      img.img-circle(alt='image', src='http://placehold.it/40/30a5ff/fff')
-                    .message-body
-                      small.pull-right 1 hour ago
-                      a(href='#')
-                        | New message from 
-                        strong Jane Doe
-                        | .
-                      br
-                      small.text-muted 12:27 pm - 25/03/2015
-                li.divider
-                li
-                  .all-button
-                    a(href='#')
-                      em.fa.fa-inbox
-                      strong All Messages
-            li.dropdown
-              a.dropdown-toggle.count-info(data-toggle='dropdown', href='#')
                 em.fa.fa-bell
                 span.label.label-info 5
               ul.dropdown-menu.dropdown-alerts
@@ -86,7 +49,7 @@ html
                   a(href='#')
                     div
                       em.fa.fa-user
-                      |  5 New Followers
+                      |  5 Novos pedidos de registo
                       span.pull-right.text-muted.small 4 mins ago
       // /.container-fluid
     #sidebar-collapse.col-sm-3.col-lg-2.sidebar
@@ -94,7 +57,7 @@ html
         .profile-userpic
           img.img-responsive(src='http://placehold.it/50/30a5ff/fff', alt='')
         .profile-usertitle
-          .profile-usertitle-name Username
+          .profile-usertitle-name= testObj.username
           .profile-usertitle-status
             span.indicator.label-success
             | Online
@@ -107,7 +70,7 @@ html
         li.active
           a(href='index.html')
             em.fa.fa-dashboard  
-            |  Dashboard
+            | Dashboard
         //- li
         //-   a(href='widgets.html')
         //-     em.fa.fa-calendar  
@@ -115,7 +78,7 @@ html
         li
           a(href='charts.html')
             em.fa.fa-bar-chart  
-            |  Charts
+            |  Gráficos
         //- li
         //-   a(href='elements.html')
         //-     em.fa.fa-toggle-off  
@@ -144,7 +107,7 @@ html
         //-         span.fa.fa-arrow-right  
         //-         |  Sub Item 3
         li
-          a(href='login.html')
+          a(href='http://localhost:3000/logout')
             em.fa.fa-power-off  
             |  Logout
     // /.sidebar
@@ -154,44 +117,38 @@ html
           li
             a(href='#')
               em.fa.fa-home
-          li.active Dashboard
+          li.active admin
       // /.row
       .row
         .col-lg-12
-          h1.page-header Dashboard
+          h1.page-header Admin Dashboard
       // /.row
       .panel.panel-container
         .row
-          .col-xs-6.col-md-3.col-lg-3.no-padding
+          .col-xs-6.col-md-4.col-lg-4.no-padding
             .panel.panel-teal.panel-widget.border-right
               .row.no-padding
-                em.fa.fa-xl.fa-shopping-cart.color-blue
-                .large 120
-                .text-muted New Orders
-          .col-xs-6.col-md-3.col-lg-3.no-padding
-            .panel.panel-blue.panel-widget.border-right
-              .row.no-padding
-                em.fa.fa-xl.fa-comments.color-orange
-                .large 52
-                .text-muted Comments
-          .col-xs-6.col-md-3.col-lg-3.no-padding
+                em.fa.fa-xl.fa-users.color-blue
+                .large= testObj.new_productors_num
+                .text-muted Novos Produtores
+          .col-xs-6.col-md-4.col-lg-4.no-padding
             .panel.panel-orange.panel-widget.border-right
               .row.no-padding
                 em.fa.fa-xl.fa-users.color-teal
-                .large 24
-                .text-muted New Users
-          .col-xs-6.col-md-3.col-lg-3.no-padding
+                .large= testObj.new_users_num
+                .text-muted Novos Utilizadores
+          .col-xs-6.col-md-4.col-lg-4.no-padding
             .panel.panel-red.panel-widget
               .row.no-padding
                 em.fa.fa-xl.fa-search.color-red
-                .large 25.2k
-                .text-muted Page Views
+                .large= testObj.page_views_num
+                .text-muted Consultas à página
         // /.row
       .row
         .col-md-12
           .panel.panel-default
             .panel-heading
-              | Site Traffic Overview
+              | Tráfego geral do site
               ul.pull-right.panel-settings.panel-button-tab-right
                 li.dropdown
                   a.pull-right.dropdown-toggle(data-toggle='dropdown', href='#')
@@ -220,30 +177,24 @@ html
                 canvas#lineChartDemo.main-chart(height='200', width='1000')
       // /.row
       .row
-        .col-xs-6.col-md-3
+        .col-xs-6.col-md-4
           .panel.panel-default
             .panel-body.easypiechart-panel
-              h4 New Orders
-              #easypiechart-blue.easypiechart(data-percent='92')
-                span.percent 92%
-        .col-xs-6.col-md-3
+              h4 Novos Produtores
+              #easypiechart-blue.easypiechart(data-percent=testObj.new_productors_percent)
+                span.percent= testObj.new_productors_percent + "%"
+        .col-xs-6.col-md-4
           .panel.panel-default
             .panel-body.easypiechart-panel
-              h4 Comments
-              #easypiechart-orange.easypiechart(data-percent='65')
-                span.percent 65%
-        .col-xs-6.col-md-3
+              h4 Novos utilizadores
+              #easypiechart-teal.easypiechart(data-percent=testObj.new_users_percent)
+                span.percent= testObj.new_users_percent + "%"
+        .col-xs-6.col-md-4
           .panel.panel-default
             .panel-body.easypiechart-panel
-              h4 New Users
-              #easypiechart-teal.easypiechart(data-percent='56')
-                span.percent 56%
-        .col-xs-6.col-md-3
-          .panel.panel-default
-            .panel-body.easypiechart-panel
-              h4 Visitors
-              #easypiechart-red.easypiechart(data-percent='27')
-                span.percent 27%
+              h4 Consultas à página
+              #easypiechart-red.easypiechart(data-percent=testObj.page_views_percent)
+                span.percent= testObj.page_views_percent  + "%"   
       // /.row
       .row
         .col-md-6
@@ -383,7 +334,7 @@ html
         //-         span.input-group-btn
         //-           button#btn-todo.btn.btn-primary.btn-md Add
         // /.col
-        .col-md-12
+        //- .col-md-12
           .panel.panel-default
             .panel-heading
               | Timeline
@@ -453,32 +404,134 @@ html
             a(href='https://www.medialoot.com') Medialoot
       // /.row
       // /.main
-      script(src='/javascripts/jquery-1.11.1.min.js')
-      script(src='/javascripts/bootstrap.min.js')
-      script(src='/javascripts/chart.min.js')
-      script(src='/javascripts/chart-data.js')
-      script(src='/javascripts/easypiechart.js')
-      script(src='/javascripts/easypiechart-data.js')
-      script(src='/javascripts/bootstrap-datepicker.js')
-      script(src='/javascripts/custom.js')
+      script(type='text/javascript', src='/javascripts/jquery-1.11.1.min.js')
+      script(type='text/javascript', src='/javascripts/bootstrap.min.js')
+      script(type='text/javascript', src='/javascripts/chart.min.js')      
+      script(type='text/javascript', src='/javascripts/easypiechart.js')
+      script(type='text/javascript', src='/javascripts/easypiechart-data.js')
+      script(type='text/javascript', src='/javascripts/bootstrap-datepicker.js')
+      script(src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js')
+      script(src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js')
+      script(src='https://github.com/nagix/chartjs-plugin-streaming/releases/download/v1.5.0/chartjs-plugin-streaming.min.js')
+
+
       script.
-        var testObj = !{testObj};
+        var testObj = !{chart_data};
         
 
-        window.onload = function () {
-            var ctxl = $("#lineChartDemo").get(0).getContext("2d");		
-            var lineChart = new Chart(ctxl).Line(testObj.data, {
-            responsive: true,
+        //- window.onload = function () {
+        //-     var ctxl = $("#lineChartDemo").get(0).getContext("2d");		
+        //-     var lineChart = new Chart(ctxl).Line(testObj.data, {
+        //-     responsive: true,
+        //-     scaleLineColor: "rgba(0,0,0,.2)",
+        //-     scaleGridLineColor: "rgba(0,0,0,.05)",
+        //-     scaleFontColor: "#c5c7cc"
+        //-     });
+
+        //- //- var chart1 = document.getElementById("lineChartDemo").getContext("2d");
+        //- //- window.myLine = new Chart(chart1).Line(lineChartData, {
+        //- //- responsive: true,
+        //- //- scaleLineColor: "rgba(0,0,0,.2)",
+        //- //- scaleGridLineColor: "rgba(0,0,0,.05)",
+        //- //- scaleFontColor: "#c5c7cc"
+        //- //- });
+        //- };
+
+        function onRefresh(chart) {
+            chart.config.data.datasets.forEach(function(dataset) {
+                dataset.data.push({
+                    x: Date.now(),
+                    y: 132
+                });
+            });
+        }
+
+        var config = {
+            type: 'line',
             scaleLineColor: "rgba(0,0,0,.2)",
             scaleGridLineColor: "rgba(0,0,0,.05)",
-            scaleFontColor: "#c5c7cc"
-            });
-
-        //- var chart1 = document.getElementById("lineChartDemo").getContext("2d");
-        //- window.myLine = new Chart(chart1).Line(lineChartData, {
-        //- responsive: true,
-        //- scaleLineColor: "rgba(0,0,0,.2)",
-        //- scaleGridLineColor: "rgba(0,0,0,.05)",
-        //- scaleFontColor: "#c5c7cc"
-        //- });
+            scaleFontColor: "#c5c7cc",
+            responsive: true,
+            data: {
+                labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+                datasets: [
+                    {
+                        label: "Pedidos GET",
+                        fill: true,
+                        backgroundColor: "rgba(220,220,220,0.2)",
+                        borderColor: "rgba(220,220,220,1)",
+                        pointColor : "rgba(220,220,220,1)",
+                        pointStrokeColor : "#fff",
+                        pointHighlightFill : "#fff",
+                        pointHighlightStroke : "rgba(220,220,220,1)",
+                        data: testObj.get_info
+                    },
+                    {
+                        label: "Pedidos POST",
+                        fill: true,
+                        backgroundColor: "rgba(48, 164, 255, 0.2)",
+                        borderColor: "rgba(48, 164, 255, 1)",
+                        pointColor : "rgba(48, 164, 255, 1)",
+                        pointStrokeColor : "#fff",
+                        pointHighlightFill : "#fff",
+                        pointHighlightStroke : "rgba(48, 164, 255, 1)",
+                        data: testObj.post_info
+                    }
+                ]
+            },        
+            options: {
+                //- title: {
+                //- 	display: true,
+                //- 	text: 'Line chart (hotizontal scroll) sample'
+                //- },
+                scales: {                    
+                    xAxes: [{
+                        //- type: 'realtime',
+                        realtime: {
+                            duration: 20000,
+                            refresh: 1000,
+                            delay: 2000,
+                            onRefresh: onRefresh
+                        }
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Número de pedidos'
+                        }
+                    }]
+                },
+                tooltips: {
+                    mode: 'nearest',
+                    intersect: false
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: false
+                }
+            }
         };
+
+        window.onload = function() {
+            var ctxl = $("#lineChartDemo").get(0).getContext("2d");					
+            window.myChart = new Chart(ctxl, config);
+        };
+        
+
+
+        var ctxl = $("#lineChartDemo").get(0).getContext("2d");		
+        var myChart = new Chart(ctxl, config);
+
+        // your event listener code - assuming the event object has the timestamp and value properties
+        function onReceive(event) {
+
+            // append the new data to the existing chart data
+            myChart.data.datasets[0].data.push(testObj.data);
+
+            // update chart datasets keeping the current animation
+            myChart.update({
+                preservation: true
+            });
+        }
+
+

@@ -19,7 +19,7 @@ router.get('/', auth.checkBasicAuthentication, (req, res) => {
 //TODO: deixar apenas procurar por utilizadores ou produtores
 // GET /api/users/:username
 router.get('/user/:username', auth.checkBasicAuthentication, (req, res) => {
-    console.log("/users/:username")
+    console.log("/user/:username")
     User.getUserByUsername(req.params.username)
         .then(data => res.jsonp(data))
         .catch(err => res.status(500).send('Erro na consulta de utilizador: ' + err))

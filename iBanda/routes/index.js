@@ -18,10 +18,13 @@ router.post('/login', function (req, res) {
 	axios.post('http://localhost:3000/api/users/login', params)
 		.then(response => {			
 			req.session.token = response.data;
-			req.session.save()
-			var redirectTo = req.session.redirectTo || '/';
-			delete req.session.redirectTo;			
-			res.redirect(redirectTo);	    
+			req.session.save(err => {
+				if (err) console.log("POST /login Erro no login do utilizador! " + JSON.stringify(err.response.data.info));
+				var redirectTo = req.session.redirectTo || '/';
+				delete req.session.redirectTo;			
+				res.redirect(redirectTo);
+			})
+				    
 		})
 		.catch(erro => {
 			console.log("POST /login Erro no login do utilizador! " + JSON.stringify(erro.response.data.info));

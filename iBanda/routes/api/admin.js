@@ -3,7 +3,56 @@ const passport = require('passport')
 var router = express.Router()
 var User = require('../../controllers/user')
 var auth = require("../../authentication/aut")
+var fs = require("fs")
 const {validationResult} = require('express-validator/check')
+
+router.get('/stats', auth.checkAdminAuthentication, (req, res) => {    
+    //TODO: fazer isto na callback 
+    console.log("inside /api/admin/stats " + req.user)
+    fs.readFile('Logs/stats_by_url.json', 'utf8', (err, data) => {
+        if (err) {            
+            const error = new Error(err)
+            error.info = "" + err
+            return res.status(500).send(error)
+        }
+        dataFromFile = JSON.parse(data);   
+        get_info = [0,0,0,0,0,0,0,0,0,0,0,0];
+        post_info = [0,0,0,0,0,0,0,0,0,0,0,0];    
+
+        url = "/users"
+        for(var year in dataFromFile[url]["GET"])      
+            for(var month in dataFromFile[url]["GET"][year]["total_req"])                    
+                get_info[month] += dataFromFile[url]["GET"][year]["total_req"][month]
+                        
+        for(var year in dataFromFile[url]["POST"])                
+            for(var month in dataFromFile[url]["POST"][year]["total_req"])
+            post_info[month] += dataFromFile[url]["POST"][year]["total_req"][month]
+
+         console.log("Total gets: " + get_info + " total posts: " + post_info)
+        res.jsonp({get_info: get_info, post_info: post_info})
+    })
+})
+
+router.get('/newusers', auth.checkAdminAuthentication, (req, res) => {    
+    //TODO: fazer isto na callback 
+    console.log("inside /api/admin/stats " + req.user)
+    fs.readFile('Logs/stats_by_url.json', 'utf8', (err, data) => {
+        if (err) {            
+            const error = new Error(err)
+            error.info = "" + err
+            return res.status(500).send(error)
+        }
+        dataFromFile = JSON.parse(data);           
+        post_info = 0;
+
+        url = "/users"
+        for(var year in dataFromFile[url]["POST"])                
+            for(var month in dataFromFile[url]["POST"][year]["total_req"])
+            post_info += dataFromFile[url]["POST"][year]["total_req"][month]         
+        res.jsonp({new_users: post_info})
+    })
+})
+
 
 // Get users by role
 router.get('/users/role/:role', auth.checkAdminAuthentication, (req, res) => {
@@ -11,6 +60,19 @@ router.get('/users/role/:role', auth.checkAdminAuthentication, (req, res) => {
         .then(data => res.jsonp(data))
         .catch(errors => res.status(500).send('Erro na listagem: ' + errors))
 });
+
+// Get username by user id
+router.get('/user/id/:uid', auth.checkAdminAuthentication, (req, res) => {
+    console.log("get username: " + JSON.stringify(req.params))
+    User.getUserById(req.params.uid)
+        .then(data => res.jsonp(data.username))
+        .catch(err => {
+            const error = new Error(err)
+            error.info = "Não foi possível encontrar o utilizador com o id: " + req.params.uid
+            return res.status(500).send(error)            
+        })
+});
+
 
 // SignUp
 router.post('/', User.validate('createAdmin'), (req, res, next) => {
@@ -30,5 +92,6 @@ router.post('/', User.validate('createAdmin'), (req, res, next) => {
     })(req, res, next)
 
 });
+
 
 module.exports = router;
