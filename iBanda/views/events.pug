@@ -1,0 +1,31 @@
+extends layout
+block content
+    section.blog-area.section
+        .container.bootstrap.snippet
+            center.h2.w3-teal Agenda de Eventos
+        each e in eventos
+        tr
+          td
+            a(href='/eventos/' + e._id)= e.data
+
+          if e.horario
+            td= e.horario
+          else
+            td ----
+
+          td= e.tipo
+
+          if e.designacao
+            td= e.designacao
+          else
+            td ----
+
+          if e.local
+            td= e.local
+          else
+            td ----
+
+          if e.informacoes
+            td= e.informacoes
+          else
+            td ----

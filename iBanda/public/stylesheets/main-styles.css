@@ -240,8 +240,20 @@ header .src-area .src-btn{ position: absolute; top: 0; bottom: 0; left: 0; width
 /* ---------------------------------
 10. FOOTER
 --------------------------------- */
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:before {
+  bottom: .5em;
+}
 
-footer{ padding: 50px 0 30px; background: #fff; }
+footer{ padding: 20px 0 10px; background: #fff; }
 
 footer .footer-section{ margin-bottom: 5px; }
 
@@ -269,5 +281,7 @@ footer .input-area .email-input:focus{ box-shadow: 0px 0px 1px #aaa; }
 footer .input-area .submit-btn{ position: absolute; top: 0; bottom: 0; right: 0; width: 50px; background: none; 
 	border: 0; outline: 0; margin-right: 10px; opacity: .8; cursor: pointer; transition: all .2s; }
 
-
+p.back-link{
+	text-align: center;
+}
 

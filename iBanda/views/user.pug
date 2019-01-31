@@ -1,17 +1,24 @@
 extends layout
 block content
-  .w3-container
-    h1.w3-teal= user.username
-    table.w3-table-all
-        tr
-            th E-Mail
-            td= user.email
-        tr
-            th Username
-            td= user.username
-        tr 
-            th Name
-            td= user.name
-        tr 
-            th Role
-            td= user.role
+    link(rel='stylesheet', type='text/css', href='//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css')
+    .w3-container
+        br
+        center.h2.w3-teal= user.name
+        br
+        table.table.table-striped
+                tr
+                    th(scope='col') Nome
+                    td(scope='row')= user.name 
+
+                tr
+                    th(scope='col') Username
+                    td(scope='row')= user.username
+                        
+                tr
+                    th(scope='col') Email
+                    td(scope='row')= user.email
+        br
+        a.table-link(href="/users/").h5
+                span.fa-stack
+                    i.fa.fa-square.fa-stack-2x
+                    i.fa.fa-pencil.fa-stack-1x.fa-inverse
