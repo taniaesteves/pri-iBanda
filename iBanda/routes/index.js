@@ -25,9 +25,9 @@ router.post('/login', function (req, res) {
 		email: req.body.email, password: req.body.password,		
 	}
 	axios.post('http://localhost:3000/api/users/login', params)
-		.then(response => {			
-			req.session.token = response.data;
-			req.session.email = req.body.email;
+		.then(response => {						
+			req.session.token = response.data.token;
+			req.session.username = response.data.username;
 			req.session.save(err => {
 				if (err) console.log("POST /login Erro no login do utilizador! " + JSON.stringify(err.response.data.info));
 				var redirectTo = req.session.redirectTo || '/';
@@ -67,6 +67,7 @@ router.post('/signup', function (req, res) {
 router.get('/logout', function (req, res, next) {
 	axios.get('http://localhost:3000/api/users/logout', { headers: { "Authorization": 'Bearer ' + req.session.token } })
 		.then(() => {
+			delete req.session.email
 			res.redirect('/');	
 		})
 		.catch(erro => {
