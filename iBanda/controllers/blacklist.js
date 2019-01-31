@@ -1,4 +1,4 @@
-var BlackList = require("../models/BlackList");
+var BlackList = require("../models/blacklist");
 
 module.exports.addToken = token =>{
   return BlackList.create(token)
