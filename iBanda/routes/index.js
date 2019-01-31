@@ -4,7 +4,16 @@ var axios = require('axios')
 
 /* GET home page. */
 router.get('/', function (req, res) {	
-	res.send('iBanda Home Page')
+	// res.send('iBanda Home Page')
+	axios.get('http://localhost:3000/api/noticias/', { headers: { "Authorization": 'Bearer ' + req.session.token } })
+	.then(data => {
+		res.render('index', {noticias: data.data})
+	})
+	.catch(erro => {
+		console.log("POST /login Erro no login do utilizador! " + JSON.stringify(erro.response.data.info));
+		req.flash('error', erro.response.data.info)
+		// res.redirect(301, '/login');
+	})
 });
 
 router.get('/login', function (req, res) {	
@@ -18,10 +27,14 @@ router.post('/login', function (req, res) {
 	axios.post('http://localhost:3000/api/users/login', params)
 		.then(response => {			
 			req.session.token = response.data;
-			req.session.save()
-			var redirectTo = req.session.redirectTo || '/';
-			delete req.session.redirectTo;			
-			res.redirect(redirectTo);	    
+			req.session.email = req.body.email;
+			req.session.save(err => {
+				if (err) console.log("POST /login Erro no login do utilizador! " + JSON.stringify(err.response.data.info));
+				var redirectTo = req.session.redirectTo || '/';
+				delete req.session.redirectTo;			
+				res.redirect(redirectTo);
+			})
+				    
 		})
 		.catch(erro => {
 			console.log("POST /login Erro no login do utilizador! " + JSON.stringify(erro.response.data.info));

@@ -20,10 +20,12 @@ const addRequestId = require('express-request-id')();
 require('./authentication/aut')
 
 var eventosAPIRouter = require('./routes/api/eventos');
+var noticiasAPIRouter = require('./routes/api/noticias');
 var usersAPIRouter = require('./routes/api/users');
 var adminAPIRouter = require('./routes/api/admin');
 var indexRouter = require('./routes/index');
 var eventosRouter = require('./routes/eventos');
+var noticiasRouter = require('./routes/noticias');
 var usersRouter = require('./routes/users');
 var adminRouter = require('./routes/admin');
 var obrasRouter = require('./routes/obras');
@@ -45,7 +47,7 @@ app.use(session({
     return uuid()},
   store: new FileStore(),
   secret: 'O meu segredo',
-  resave: true,
+  resave: false,
   saveUninitialized: true
 }))
 
@@ -79,6 +81,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/eventos', eventosRouter);
 app.use('/users', usersRouter);
+app.use('/noticias', noticiasRouter);
 app.use('/admin', adminRouter)
 app.use('/obras', obrasRouter)
 
@@ -107,6 +110,7 @@ app.use(morgan(loggerFormat, {
 
 
 app.use('/api/eventos', eventosAPIRouter)
+app.use('/api/noticias', noticiasAPIRouter)
 app.use('/api/users', usersAPIRouter)
 app.use('/api/admin', adminAPIRouter)
 

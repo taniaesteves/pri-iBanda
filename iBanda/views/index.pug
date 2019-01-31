@@ -1,5 +1,68 @@
 extends layout
-
 block content
-  h1= title
-  p Welcome to #{title}
+  link(rel='stylesheet', href='/stylesheets/main-styles.css') 
+     
+  .slider.display-table.center-text
+    //- h1.title.display-table-cell
+    //-   b IBANDA
+  // slider
+  head
+    title Login 
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    // ===============================================================================================
+    link(rel='icon', type='image/png', href='images/icons/favicon.ico')
+    // ===============================================================================================
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', href='/fonts/font-awesome-4.7.0/css/font-awesome.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', href='/stylesheets/animate.css')
+    // ===============================================================================================
+    link(rel='stylesheet', href='/stylesheets/hamburgers.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', href='/stylesheets/animsition.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', href='/stylesheets/select2.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', href='/stylesheets/daterangepicker.css')
+    // ===============================================================================================
+    link(rel='stylesheet', href='/stylesheets/util.css')
+    link(rel='stylesheet', href='/stylesheets/login.css')
+    // ===============================================================================================
+  body
+    section.blog-area.section
+      .container
+        .row
+          each noticia in noticias 
+            .col-lg-4.col-md-6
+              .card.h-100
+                .single-post.post-style-2.post-style-3
+                  .blog-info
+                    if noticia.pretitulo
+                      h6.pre-title
+                        b= noticia.pretitulo
+                    h4.title
+                      a(href="/noticias/"+noticia._id)
+                        b= noticia.titulo
+                    p= noticia.descricao
+                    .avatar-area
+                      //- a.avatar(href='#')
+                      //-   img(src='images/icons8-team-355979.jpg', alt='Profile Image')
+                      .right-area
+                        a.name(href='#')
+                          b= noticia.autor
+                        h6.date(href='#')= noticia.data
+                    //- ul.post-footer
+                    //-   li
+                    //-     a(href='#')
+                    //-       i.ion-heart
+                    //-       | 57
+                    //-   li
+                    //-     a(href='#')
+                    //-       i.ion-chatbubble
+                    //-       | 6
+                    //-   li
+                    //-     a(href='#')
+                    //-       i.ion-eye
+                    //-       | 138

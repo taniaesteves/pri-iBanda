@@ -1,0 +1,64 @@
+extends layout
+block content
+  //- link(href='/stylesheets/main-styles.css', rel='stylesheet')
+  //- link(href='/stylesheets/responsive.css', rel='stylesheet')
+  .slider.display-table.center-text
+    //- h1.title.display-table-cell
+    //-   b IBANDA
+  // slider
+  head
+    title Login 
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(href='/stylesheets/sp2-styles.css', rel='stylesheet')
+    link(href='/stylesheets/sp2-responsive.css', rel='stylesheet')
+  
+    // ===============================================================================================
+    link(rel='icon', type='image/png', href='images/icons/favicon.ico')
+    // ===============================================================================================
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', href='/fonts/font-awesome-4.7.0/css/font-awesome.min.css') 
+    // ===============================================================================================
+    link(rel='stylesheet', href='/stylesheets/animate.css')
+    // ===============================================================================================
+    link(rel='stylesheet', href='/stylesheets/hamburgers.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', href='/stylesheets/animsition.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', href='/stylesheets/select2.min.css')
+    // ===============================================================================================
+    link(rel='stylesheet', href='/stylesheets/daterangepicker.css')
+    // ===============================================================================================
+    link(rel='stylesheet', href='/stylesheets/util.css')
+    link(rel='stylesheet', href='/stylesheets/login.css')
+    // ===============================================================================================
+  body
+    section.blog-area.section
+      .container
+        .row
+          .col-lg-1.col-md-0
+          .col-lg-10.col-md-12
+            .main-post
+              .post-top-area
+                h5.pre-title 
+                  b= noticia.pretitulo
+                h3.title
+                  //- a(href=)
+                  b= noticia.titulo                
+                .post-info
+                  .middle-area
+                    a.name(href='#')
+                      b= noticia.autor
+                    h6.date= noticia.data
+                // post-info
+                p.para= noticia.descricao              
+              // post-top-area
+              .post-bottom-area
+                p.para= noticia.infos             
+                // post-info
+              // post-bottom-area
+            // main-post
+          // col-lg-8 col-md-12
+        // row
+      // container

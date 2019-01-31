@@ -11,7 +11,7 @@ const {validationResult} = require('express-validator/check')
 // Get all users
 router.get('/', auth.checkBasicAuthentication, (req, res) => {
     console.log("/users")
-    User.listByRole("user")
+    User.list()
         .then(data => res.jsonp(data))
         .catch(errors => res.status(500).send('Erro na listagem: ' + errors))
 });
@@ -19,8 +19,15 @@ router.get('/', auth.checkBasicAuthentication, (req, res) => {
 //TODO: deixar apenas procurar por utilizadores ou produtores
 // GET /api/users/:username
 router.get('/user/:username', auth.checkBasicAuthentication, (req, res) => {
-    console.log("/users/:username")
+    console.log("/user/:username")
     User.getUserByUsername(req.params.username)
+        .then(data => res.jsonp(data))
+        .catch(err => res.status(500).send('Erro na consulta de utilizador: ' + err))
+})
+
+router.get('/user/email/:email', auth.checkBasicAuthentication, (req, res) => {
+    console.log("/user/:email")
+    User.getUser(req.params.email)
         .then(data => res.jsonp(data))
         .catch(err => res.status(500).send('Erro na consulta de utilizador: ' + err))
 })

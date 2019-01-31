@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var axios = require('axios')  
-var fs = require('fs')  
+var axios = require('axios')
+var fs = require('fs')
+const jwt = require('jsonwebtoken')
 
 // router.get('/', function (req, res) {	
 // 	res.render('layout_admin');
@@ -9,7 +10,7 @@ var fs = require('fs')
 
 
 // signup as admin
-router.get('/signup', function (req, res) {	
+router.get('/signup', function (req, res) {
 	res.render('signupAdmin', { expressFlash: req.flash('error'), sessionFlash: res.locals.sessionFlash });
 });
 
@@ -32,11 +33,11 @@ router.post('/signup', function (req, res) {
 
 // Get users by role
 router.get('/role/:role', (req, res) => {
-	req.session.redirectTo = '/admin/users/role/'+req.params.role;
-	console.log("/role/:role redirectTo" + JSON.stringify(req.session.redirectTo))		
+	req.session.redirectTo = '/admin/users/role/' + req.params.role;
+	console.log("/role/:role redirectTo" + JSON.stringify(req.session.redirectTo))
 	axios.get('http://localhost:3000/api/admin/users/role/' + req.params.role, { headers: { "Authorization": 'Bearer ' + req.session.token } })
-		.then(users => {			
-			res.render('users', {users: users.data})
+		.then(users => {
+			res.render('users', { users: users.data })
 			delete req.session.redirectTo
 		})
 		.catch(erro => {
@@ -48,7 +49,7 @@ router.get('/role/:role', (req, res) => {
 
 // router.get('/', (req, res) => {
 // 	var dataFromFile = JSON.parse(fs.readFileSync('Logs/stats_by_url.json', 'utf8'));
-	
+
 // 	var data = {		
 // 		labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "Octover", "November", "December"],
 // 		datasets: [
@@ -96,63 +97,48 @@ router.get('/role/:role', (req, res) => {
 // 	]
 
 // 	res.render('layout_admin', { testObj: JSON.stringify({data: data, pdata: pdata}) })
-	
-	
+
+
 // });
 
 router.get('/', (req, res) => {
-	var dataFromFile = JSON.parse(fs.readFileSync('Logs/stats_total_requests.json', 'utf8'));
-	
-	var data = {		
-		labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "Octover", "November", "December"],
-		datasets: [
-			{
-				label: "Pedidos GET",
-				fillColor : "rgba(220,220,220,0.2)",
-				strokeColor : "rgba(220,220,220,1)",
-				pointColor : "rgba(220,220,220,1)",
-				pointStrokeColor : "#fff",
-				pointHighlightFill : "#fff",
-				pointHighlightStroke : "rgba(220,220,220,1)",
-				data: dataFromFile['GET']['2019']
-			},
-			{
-				label: "Pedidos POST",
-				fillColor : "rgba(48, 164, 255, 0.2)",
-				strokeColor : "rgba(48, 164, 255, 1)",
-				pointColor : "rgba(48, 164, 255, 1)",
-				pointStrokeColor : "#fff",
-				pointHighlightFill : "#fff",
-				pointHighlightStroke : "rgba(48, 164, 255, 1)",
-				data: dataFromFile['POST']['2019']
-			}
-		]
-	};
-	var pdata = [
-	{
-		value: 300,
-		color:"#F7464A",
-		highlight: "#FF5A5E",
-		label: "Red"
-	},
-	{
-		value: 50,
-		color: "#46BFBD",
-		highlight: "#5AD3D1",
-		label: "Green"
-	},
-	{
-		value: 100,
-		color: "#FDB45C",
-		highlight: "#FFC870",
-		label: "Yellow"
-	}
-	]
 
-	res.render('layout_admin', { testObj: JSON.stringify({data: data, pdata: pdata}) })
-	
-	
-});
-  
-  
+	console.log(req.session.token)
+	// if (req.session.token) {
+	// 	jwt.verify(req.session.token, 'iBandaSecret2', function(err, decoded) {      
+	// 	  if (err) {			  
+	// 		return res.json({ success: false, message: 'Failed to authenticate token.' });    
+	// 	  } else {
+	// 		  user_id = decoded.user.id
+	// 		console.log("user id= " + JSON.stringify(decoded.user.id));			
+	// 	  }
+	// 	})
+	// }
+	// axios.get('http://localhost:3000/api/admin/user/id/'+user_id, { headers: { "Authorization": 'Bearer ' + req.session.token } 
+	// }).then (username => {
+	axios.get('http://localhost:3000/api/admin/stats', { headers: { "Authorization": 'Bearer ' + req.session.token } })
+		.then(response => {
+
+			testObj = {
+				page_views_num: "25.2k",
+				page_views_percent: 24,
+				new_productors_num: "50",
+				new_productors_percent: 83,
+				new_users_percent: 48,
+				new_users_num: 30,
+				username: "to do!!!",
+				chart_data: JSON.stringify({ get_info: response.data.get_info, post_info: response.data.post_info })
+			}
+			res.render('layout_admin', testObj)
+		}).catch(erro => {
+			if (erro.response) {
+				if (erro.response.status == 401) return res.redirect('/login')
+				console.log('Erro get /admin por: ' + erro.response.data.info)
+			}
+			res.render('error', { error: erro, message: "Erro na listagem dos utilizadores por role!" })
+		})
+})
+// });
+
+
 module.exports = router;

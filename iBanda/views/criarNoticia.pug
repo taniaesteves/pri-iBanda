@@ -1,0 +1,69 @@
+extends layout
+block content
+  link(href='/stylesheets/sp2-styles.css', rel='stylesheet')
+  link(href='/stylesheets/news-main.css', rel='stylesheet', media='all')
+  link(href='/stylesheets/sp2-responsive.css', rel='stylesheet')
+  .slider.display-table.center-text
+    //- h1.title.color-white.display-table-cell-2
+    //-   b Criar notícia
+  // slider
+  section.blog-area.section
+    .container
+      .row
+        .col-lg-1.col-md-0
+        .col-lg-10.col-md-12
+          .main-post
+            center.h3.title 
+              b Criar Notícia
+            .post-top-area
+              form(method="POST" action="/noticias")
+                .form-row
+                  .name Título
+                  .value
+                    input.input--style-6(type='text', name='titulo', required='')                          
+                .form-row                
+                  .name Pré-título
+                  .value
+                    input.input--style-6(type='text', name='pretitulo')
+                .form-row
+                  .name Descrição
+                  .value
+                    .input-group
+                      textarea.textarea--style-6(name='descricao', placeholder='Breve resumo da notícia...')
+                .form-row
+                  .name Conteúdo
+                  .value
+                    .input-group
+                      textarea.textarea--style-6(name='infos', placeholder='Corpo da notícia...', required='')
+                center.col-sm-12
+                  button#form-submit.submit-btn(type='submit')
+                    b POST COMMENT
+              // col-sm-12
+
+
+              // col-sm-12
+
+                //- i.ion-ios-search-strong
+
+            //- .post-top-area
+            //-   h5.pre-title 
+            //-     b= noticia.pretitulo
+            //-   h3.title
+            //-     //- a(href=)
+            //-     b= noticia.titulo                
+            //-   .post-info
+            //-     .middle-area
+            //-       a.name(href='#')
+            //-         b= noticia.autor
+            //-       h6.date= noticia.data
+            //-   // post-info
+            //-   p.para= noticia.descricao              
+            //- // post-top-area
+            //- .post-bottom-area
+            //-   p.para= noticia.infos             
+              // post-info
+            // post-bottom-area
+          // main-post
+        // col-lg-8 col-md-12
+      // row
+    // container
