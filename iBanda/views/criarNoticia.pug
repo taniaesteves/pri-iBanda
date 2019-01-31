@@ -18,7 +18,7 @@ block content
             .post-top-area
               form(method="POST" action="/noticias")
                 .form-row
-                  .name Título
+                  .name Título*
                   .value
                     input.input--style-6(type='text', name='titulo', required='')                          
                 .form-row                
@@ -31,13 +31,13 @@ block content
                     .input-group
                       textarea.textarea--style-6(name='descricao', placeholder='Breve resumo da notícia...')
                 .form-row
-                  .name Conteúdo
+                  .name Conteúdo*
                   .value
                     .input-group
                       textarea.textarea--style-6(name='infos', placeholder='Corpo da notícia...', required='')
                 center.col-sm-12
                   button#form-submit.submit-btn(type='submit')
-                    b POST COMMENT
+                    b CRIAR NOTÍCIA
               // col-sm-12
 
 
