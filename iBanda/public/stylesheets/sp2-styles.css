@@ -68,6 +68,10 @@ header{ font-weight: 400; }
 
 .display-table-cell{ display: table-cell; vertical-align: middle; }
 
+.display-table-cell-2{ display: table-cell; padding-top: 70px; }
+
+
+
 .card{ background: transparent; border: 0; }
 
 .no-side-padding{ padding-right: 0px; padding-left: 0px; }
@@ -102,7 +106,11 @@ header .logo img{ height: 100%; width: auto; }
 
 header .main-menu{ display: inline-block; float: left; }
 
+header .main-menu2{ display: inline-block; float: right; }
+
 header .main-menu > li{ float: left; }
+
+header .main-menu2 > li{ float: right; }
 
 header .main-menu > li > a{ height: 60px; line-height: 60px; padding: 0 25px; border-right: 1px solid #eee; }
 
@@ -110,8 +118,15 @@ header .main-menu > li > a:hover{  background: #eee; }
 
 header .main-menu > li:first-child > a{ border-left: 1px solid #eee; }
 
+header .main-menu2 > li > a{ height: 60px; line-height: 60px; padding: 0 25px; border-right: 1px solid #eee; }
+
+header .main-menu2 > li > a:hover{  background: #eee; }
+
+header .main-menu2 > li:first-child > a{ border-left: 1px solid #eee; }
 
 header .visible.main-menu{ display: block; }
+
+header .visible.main-menu2{ display: block; }
 
 
 
@@ -138,9 +153,14 @@ header .src-area .src-btn{ position: absolute; top: 0; bottom: 0; left: 0; width
 4. SLIDER
 --------------------------------- */
 
-.slider-new{ height: 300px; width: 100%; background-image: url(../../images/slider-2.jpg); background-size: cover; }  
+.slider{ height: 300px; width: 100%; background-image: url(../../images/slider-2.jpg); background-size: cover; }  
+
+.slider-2{ height: 400px; width: 100%; background-image: url(../../images/slider-2.jpg); background-size: cover; }  
+	
 
 
+.slider-login{ height: 150px; width: 100%; background-image: url(../../images/slider-2.jpg); background-size: cover; }  
+	.login100-form-title{background-image: url(../../images/slider-2.jpg); background-size: cover;}
  
 /* ---------------------------------
 5. BLOG POST
@@ -157,12 +177,17 @@ header .src-area .src-btn{ position: absolute; top: 0; bottom: 0; left: 0; width
 
 .post-area .post-info .right-area{ float: right; }
 
+.post-top-area .submit-btn{ font-family: 'Roboto', sans-serif; font-size: .8em; border: 0; outline: 0; padding: 10px 20px; cursor: pointer; 
+	border: 1px solid #114C6C; background: #114C6C; color: white; }
 
 /* ---------------------------------
 6. MAIN POST
 --------------------------------- */
 
 .main-post{ margin-top: -200px; padding: 50px 0px 20px; box-shadow: 0px 0px 5px rgba(0,0,0,.1); 
+	border-bottom: 1px solid #eee; background: #fff; }
+
+.main-post2{ margin-top: -200px; padding: 20px 0px 20px; box-shadow: 0px 0px 5px rgba(0,0,0,.1); 
 	border-bottom: 1px solid #eee; background: #fff; }
 
 .main-post .post-top-area,
@@ -251,7 +276,7 @@ header .src-area .src-btn{ position: absolute; top: 0; bottom: 0; left: 0; width
 .comment-form .form-control:focus{ border-color: #498BF9; }
 
 .comment-form .submit-btn{ font-size: .8em; border: 0; outline: 0; padding: 10px 20px; cursor: pointer; 
-	border: 1px solid #D2E2FC; background: #D2E2FC; }
+	border: 1px solid #114C6C; background: #114C6C; }
 
 .comment-form .submit-btn:hover{ background: none; }
 
