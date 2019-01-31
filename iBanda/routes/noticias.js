@@ -11,6 +11,17 @@ router.get('/', function(req, res) {
         })
 });
 
+router.get('/criar-noticia', function(req, res) {
+    // axios.get('http://localhost:3000/api/noticias/' + req.params.id)
+    //     .then(noticia => res.render('noticia', {noticia: noticia.data}))
+    //     .catch(erro => {
+    //         console.log('Erro na consulta da noticia: ' + erro)
+    //         res.render('error', {error: erro, message: "Meu erro..."})
+    //     })
+    res.render('createNew')
+});
+
+
 router.get('/:id', function(req, res) {
     axios.get('http://localhost:3000/api/noticias/' + req.params.id)
         .then(noticia => res.render('noticia', {noticia: noticia.data}))

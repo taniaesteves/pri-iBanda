@@ -1,7 +1,7 @@
 doctype html
 html(lang='en')
   head
-    title TITLE
+    title iBanda
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     meta(charset='UTF-8')
@@ -10,7 +10,7 @@ html(lang='en')
     // Stylesheets
     link(href='/stylesheets/bootstrap.css', rel='stylesheet')
     link(href='/stylesheets/ionicons.css', rel='stylesheet')
-    link(href='/stylesheets/styles.css', rel='stylesheet')
+    link(href='/stylesheets/main-styles.css', rel='stylesheet')
     link(href='/stylesheets/responsive.css', rel='stylesheet')
   body
     header
@@ -21,24 +21,27 @@ html(lang='en')
           i.ion-navicon
         ul#main-menu.main-menu.visible-on-click
           li
-            a(href='#') Início
+            a(href='/') Início
+          li
+            a(href='#') Notícias
+          li
+            a(href='#') Eventos 
           li
             a(href='#') Obras
-          li
-            a(href='#') Eventos         
+                  
         // main-menu
+        .menu-nav-icon(data-nav-menu='#main-menu2')
+          i.ion-navicon
+        ul#main-menu2.main-menu2.visible-on-click
+          li
+            a(href='/login') Login
         //- .src-area
         //-   form
         //-     button.src-btn(type='submit')
         //-       i.ion-ios-search-strong
         //-     input.src-input(type='text', placeholder='Type of search')
       // conatiner
-    .slider.display-table.center-text
-      //- h1.title.display-table-cell
-      //-   b IBANDA
-    // slider
-    section.blog-area.section
-      block content
+    block content
     // section
     footer
       .container

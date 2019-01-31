@@ -1,0 +1,36 @@
+extends layout
+block content
+  link(href='/stylesheets/sp2-styles.css', rel='stylesheet')
+  link(href='/stylesheets/sp2-responsive.css', rel='stylesheet')
+  .slider-new.display-table.center-text
+    //- h1.title.display-table-cell
+    //-   b IBANDA
+  // slider
+  section.blog-area.section
+    .container
+      .row
+        .col-lg-1.col-md-0
+        .col-lg-10.col-md-12
+          .main-post
+            .post-top-area
+              h5.pre-title 
+                b= noticia.pretitulo
+              h3.title
+                //- a(href=)
+                b= noticia.titulo                
+              .post-info
+                .middle-area
+                  a.name(href='#')
+                    b= noticia.autor
+                  h6.date= noticia.data
+              // post-info
+              p.para= noticia.descricao              
+            // post-top-area
+            .post-bottom-area
+              p.para= noticia.infos             
+              // post-info
+            // post-bottom-area
+          // main-post
+        // col-lg-8 col-md-12
+      // row
+    // container

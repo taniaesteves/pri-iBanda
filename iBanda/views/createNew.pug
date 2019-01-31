@@ -1,0 +1,40 @@
+extends layout
+block content
+  link(rel='stylesheet', href='/stylesheets/sp3-styles.css')  
+  link(rel='stylesheet', href='/stylesheets/sp3-responsive.css')    
+  link(href='https://fonts.googleapis.com/css?family=Roboto:300,400,500', rel='stylesheet')
+  // Stylesheets
+  link(href='/stylesheets/bootstrap.css', rel='stylesheet')
+  link(href='/stylesheets/ionicons.css', rel='stylesheet')
+
+  .slider.display-table.center-text
+    //- h1.title.display-table-cell
+    //-   b IBANDA
+    // slider
+    section.blog-area.section
+
+      section.comment-section.center-text
+        .container
+          h4
+            b Criar Notícia
+          .row
+            .col-lg-2.col-md-0
+            .col-lg-8.col-md-12
+              .comment-form
+                form(method='post')
+                  .row
+                    .col-sm-6
+                      input.form-control(type='text', aria-required='true', name='contact-form-name', placeholder='Enter your name', aria-invalid='true', required='')
+                    // col-sm-6
+                    .col-sm-6
+                      input.form-control(type='email', aria-required='true', name='contact-form-email', placeholder='Enter your email', aria-invalid='true', required='')
+                    // col-sm-6
+                    .col-sm-12
+                      textarea.text-area-messge.form-control(name='contact-form-message', rows='2', placeholder='Enter your comment', aria-required='true', aria-invalid='false')
+                    // col-sm-12
+                    .col-sm-12
+                      button#form-submit.submit-btn(type='submit')
+                        b POST COMMENT
+                    // col-sm-12
+                    // row
+                    

@@ -75,7 +75,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/eventos', eventosRouter);
 app.use('/users', usersRouter);
-app.use('/noticia', noticiasRouter);
+app.use('/noticias', noticiasRouter);
 app.use('/admin', adminRouter)
 
 app.use(addRequestId);

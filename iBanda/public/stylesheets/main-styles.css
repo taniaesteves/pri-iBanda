@@ -102,7 +102,11 @@ header .logo img{ height: 100%; width: auto; }
 
 header .main-menu{ display: inline-block; float: left; }
 
+header .main-menu2{ display: inline-block; float: right; }
+
 header .main-menu > li{ float: left; }
+
+header .main-menu2 > li{ float: right; }
 
 header .main-menu > li > a{ height: 60px; line-height: 60px; padding: 0 25px; border-right: 1px solid #eee; }
 
@@ -110,8 +114,15 @@ header .main-menu > li > a:hover{  background: #eee; }
 
 header .main-menu > li:first-child > a{ border-left: 1px solid #eee; }
 
+header .main-menu2 > li > a{ height: 60px; line-height: 60px; padding: 0 25px; border-right: 1px solid #eee; }
+
+header .main-menu2 > li > a:hover{  background: #eee; }
+
+header .main-menu2 > li:first-child > a{ border-left: 1px solid #eee; }
 
 header .visible.main-menu{ display: block; }
+
+header .visible.main-menu2{ display: block; }
 
 
 
@@ -140,8 +151,9 @@ header .src-area .src-btn{ position: absolute; top: 0; bottom: 0; left: 0; width
 --------------------------------- */
 
 .slider{ height: 300px; width: 100%; background-image: url(../../images/slider-2.jpg); background-size: cover; }  
- 
 
+.slider-login{ height: 150px; width: 100%; background-image: url(../../images/slider-2.jpg); background-size: cover; }  
+.login100-form-title{background-image: url(../../images/slider-2.jpg); background-size: cover;}
  
 /* ---------------------------------
 5. SINGLE POST

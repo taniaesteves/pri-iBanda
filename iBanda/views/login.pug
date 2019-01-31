@@ -1,5 +1,12 @@
-doctype html
-html(lang='en')
+extends layout
+block content
+  link(rel='stylesheet', href='/stylesheets/main-styles.css')    
+  //- link(rel='stylesheet',href='/maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css')
+        
+  .slider-login.display-table.center-text
+    h1.title.color-white.display-table-cell
+      b Log In 
+  // slider  
   head
     title Login V8
     meta(charset='UTF-8')
@@ -28,9 +35,7 @@ html(lang='en')
     .limiter
       .container-login100
         .wrap-login100
-          form.login100-form.validate-form.p-l-55.p-r-55.p-t-178(method="POST" action="/login")
-            span.login100-form-title
-              | Log In
+          form.login100-form.validate-form.p-l-55.p-r-55.p-t-30(method="POST" action="/login")
             .wrap-input100.validate-input.m-b-16(data-validate='Please enter username')
               input.input100(type='text', name='email', placeholder='Email')
               span.focus-input100
@@ -45,7 +50,7 @@ html(lang='en')
             .container-login100-form-btn
               button.login100-form-btn(type="submit" value="login")
                 | Log in
-            .flex-col-c.p-t-170.p-b-40
+            .flex-col-c.p-t-30.p-b-30
               span.txt1.p-b-9
                 | Don’t have an account?
               a.txt3(href='/signup')
