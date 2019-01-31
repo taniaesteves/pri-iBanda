@@ -25,6 +25,13 @@ router.get('/user/:username', auth.checkBasicAuthentication, (req, res) => {
         .catch(err => res.status(500).send('Erro na consulta de utilizador: ' + err))
 })
 
+router.get('/user/email/:email', auth.checkBasicAuthentication, (req, res) => {
+    console.log("/user/:email")
+    User.getUser(req.params.email)
+        .then(data => res.jsonp(data))
+        .catch(err => res.status(500).send('Erro na consulta de utilizador: ' + err))
+})
+
 // SignUp
 router.post('/', User.validate('createUser'), (req, res, next) => {
     const errors = validationResult(req);

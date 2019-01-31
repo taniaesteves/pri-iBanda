@@ -103,7 +103,11 @@ header .logo img{ height: 100%; width: auto; }
 
 header .main-menu{ display: inline-block; float: left; }
 
+header .main-menu2{ display: inline-block; float: right; }
+
 header .main-menu > li{ float: left; }
+
+header .main-menu2 > li{ float: right; }
 
 header .main-menu > li > a{ height: 60px; line-height: 60px; padding: 0 25px; border-right: 1px solid #eee; }
 
@@ -111,8 +115,15 @@ header .main-menu > li > a:hover{  background: #eee; }
 
 header .main-menu > li:first-child > a{ border-left: 1px solid #eee; }
 
+header .main-menu2 > li > a{ height: 60px; line-height: 60px; padding: 0 25px; border-right: 1px solid #eee; }
+
+header .main-menu2 > li > a:hover{  background: #eee; }
+
+header .main-menu2 > li:first-child > a{ border-left: 1px solid #eee; }
 
 header .visible.main-menu{ display: block; }
+
+header .visible.main-menu2{ display: block; }
 
 
 
@@ -139,8 +150,8 @@ header .src-area .src-btn{ position: absolute; top: 0; bottom: 0; left: 0; width
 4. SLIDER
 --------------------------------- */
 
-.slider{ height: 600px; width: 100%; background-size: cover; position: relative; z-index: 1;
-	background-image: url(../../images/slider-1-1600x900.jpg); color: #fff; }
+.slider{ height: 80px; width: 100%; background-size: cover; position: relative; z-index: 1;
+	background-image: url(../../images/slider-2.jpg); color: #fff; }
 
 .slider:after{ content:'';  position: absolute; top: 0; bottom: 0; left: 0; right: 0; z-index: -1; 
 	background: rgba(0,0,0,.3); }
@@ -244,6 +255,10 @@ header .src-area .src-btn{ position: absolute; top: 0; bottom: 0; left: 0; width
 
 .info-area .input-area .email-input:focus{ box-shadow: 0px 0px 1px #aaa; }
 
+.info-area .input-area .descricao{ position: absolute; top: 0; bottom: 0; left: 0; right: 0; width: 100%;
+	padding: 0 70px 0 20px; background: transparent; border: 1; outline: 0; }
+
+
 .info-area .input-area .submit-btn{ position: absolute; top: 0; bottom: 0; right: 0; width: 50px; background: none; 
 	border: 0; outline: 0; margin-right: 10px; opacity: .8; cursor: pointer; transition: all .2s; }
 
@@ -296,15 +311,15 @@ header .src-area .src-btn{ position: absolute; top: 0; bottom: 0; left: 0; width
 .comment-form{ margin: 30px 0; padding: 30px; box-shadow: 0px 0px 5px rgba(0,0,0,.1); 
 	border: 1px solid #ddd; background: #fff; }
 
-.comment-form .form-control{ margin-bottom: 30px; border-radius: 1px; border: 0; border-bottom: 1px solid #ddd;
+.comment-form .form-control{ margin-bottom: 30px; border-radius: 2px; border: 1; border-bottom: 1px solid #ddd;
 	height: 45px; line-height: 45px; box-shadow: none; padding: 0; max-width: 100%; }
-
+	
 .comment-form textarea.form-control{ height: auto; }
 
 .comment-form .form-control:focus{ border-color: #498BF9; }
 
 .comment-form .submit-btn{ font-size: .8em; border: 0; outline: 0; padding: 10px 20px; cursor: pointer; 
-	border: 1px solid #D2E2FC; background: #D2E2FC; }
+	border: 1px solid #114C6C; background: #114C6C; }
 
 .comment-form .submit-btn:hover{ background: none; }
 
@@ -334,7 +349,7 @@ header .src-area .src-btn{ position: absolute; top: 0; bottom: 0; left: 0; width
 
 
 .more-comment-btn{ display: block; margin-bottom: 30px; padding: 10px; text-align: center; 
-	box-shadow: 0px 0px 5px rgba(0,0,0,.1); border: 1px solid #fff; background: #fff; color: #555; }
+	box-shadow: 0px 0px 5px rgba(0,0,0,.1); border: 1px solid #fff; background: #fff; color: #114C6C; }
 
 .more-comment-btn:hover{ border-color: #ccc; }	
 
@@ -344,20 +359,23 @@ header .src-area .src-btn{ position: absolute; top: 0; bottom: 0; left: 0; width
 10. FOOTER
 --------------------------------- */
 
-footer{ padding: 70px 0 30px; margin-top: 40px; background: #fff; }
+footer{ padding: 40px 0 20px; background: #fff; }
 
-footer .footer-section{ margin-bottom: 40px; }
+footer .footer-section{ margin-bottom: 5px; }
 
 footer .footer-section .title{ margin-bottom: 20px; }
 
 footer .footer-section ul > li{ margin-right: 10px; margin-top: 10px; }
 
-footer .copyright{ margin: 10px 0 20px; }
+
+footer .copyright{ margin: 5px 0; }
+
 
 footer .icons > li > a{ height: 40px; width: 40px; border-radius: 40px; line-height: 40px; text-align: center; 
-	transition: all .3s; box-shadow: 0px 0px 2px rgba(0,0,0,1); background: #498BF9; color: #fff; }
+	transition: all .3s; font-size: 1.2em; box-shadow: 0px 0px 2px rgba(0,0,0,1); background: #498BF9; color: #fff; }
 
 footer .icons > li > a:hover{ transform: translateY(-2px); box-shadow: 5px 10px 20px rgba(0,0,0,.3); }
+
 
 footer .input-area{ position: relative; height: 50px; width: 100%; box-shadow: 0px 0px 1px #bbb; background: #F5F7F6; }
 
@@ -368,5 +386,3 @@ footer .input-area .email-input:focus{ box-shadow: 0px 0px 1px #aaa; }
 
 footer .input-area .submit-btn{ position: absolute; top: 0; bottom: 0; right: 0; width: 50px; background: none; 
 	border: 0; outline: 0; margin-right: 10px; opacity: .8; cursor: pointer; transition: all .2s; }
-
-

@@ -21,7 +21,12 @@ router.get('/autor/:id', function(req, res) {
 });
 
 router.post('/', function(req, res) {
-    Noticia.create(req.body)
+    var noticia = {
+        titulo: req.body.titulo, pretitulo: req.body.pretitulo,
+        descricao: req.body.descricao, infos: req.body.infos,
+        data: req.body.data, autor: req.body.autor, visivel: req.body.visivel
+    }    
+    Noticia.create(noticia)
         .then(dados => res.jsonp(dados))
         .catch(erro => res.status(500).send('Erro na criação: ' + erro))
 });

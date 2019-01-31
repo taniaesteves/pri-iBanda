@@ -27,6 +27,7 @@ router.post('/login', function (req, res) {
 	axios.post('http://localhost:3000/api/users/login', params)
 		.then(response => {			
 			req.session.token = response.data;
+			req.session.email = req.body.email;
 			req.session.save(err => {
 				if (err) console.log("POST /login Erro no login do utilizador! " + JSON.stringify(err.response.data.info));
 				var redirectTo = req.session.redirectTo || '/';
