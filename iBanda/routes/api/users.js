@@ -11,7 +11,7 @@ const {validationResult} = require('express-validator/check')
 // Get all users
 router.get('/', auth.checkBasicAuthentication, (req, res) => {
     console.log("/users")
-    User.listByRole("user")
+    User.list()
         .then(data => res.jsonp(data))
         .catch(errors => res.status(500).send('Erro na listagem: ' + errors))
 });
