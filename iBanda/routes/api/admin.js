@@ -21,16 +21,37 @@ router.get('/stats', auth.checkAdminAuthentication, (req, res) => {
         post_info = [0,0,0,0,0,0,0,0,0,0,0,0];    
 
         url = "/users"
-        for(var year in dataFromFile[url]["GET"])      
-            for(var month in dataFromFile[url]["GET"][year]["total_req"])                    
-                get_info[month] += dataFromFile[url]["GET"][year]["total_req"][month]
+        if (dataFromFile[url]) {
+            for(var year in dataFromFile[url]["GET"])      
+                for(var month in dataFromFile[url]["GET"][year]["total_req"])                    
+                    get_info[month] += dataFromFile[url]["GET"][year]["total_req"][month]
                         
-        for(var year in dataFromFile[url]["POST"])                
-            for(var month in dataFromFile[url]["POST"][year]["total_req"])
-            post_info[month] += dataFromFile[url]["POST"][year]["total_req"][month]
+            for(var year in dataFromFile[url]["POST"])                
+                for(var month in dataFromFile[url]["POST"][year]["total_req"])
+                post_info[month] += dataFromFile[url]["POST"][year]["total_req"][month]
+        }
+        
+
+        new_users = 0
+        if (dataFromFile["/users"])
+            for(var year in dataFromFile["/users"]["POST"])      
+                for(var month in dataFromFile[url]["POST"][year]["total_req"])                    
+                    new_users += dataFromFile[url]["POST"][year]["total_req"][month]
+        
+        new_produtores = 0
+        if (dataFromFile["/produtores"])
+            for(var year in dataFromFile["/produtores"]["POST"])      
+                for(var month in dataFromFile[url]["POST"][year]["total_req"])                    
+                    new_produtores += dataFromFile[url]["POST"][year]["total_req"][month]
+
+        page_views = 0
+        if(dataFromFile["/"])
+            for(var year in dataFromFile["/"]["GET"])      
+                for(var month in dataFromFile[url]["POST"][year]["total_req"])                    
+                    page_views += dataFromFile[url]["POST"][year]["total_req"][month]
 
          console.log("Total gets: " + get_info + " total posts: " + post_info)
-        res.jsonp({get_info: get_info, post_info: post_info})
+        res.jsonp({get_info: get_info, post_info: post_info, new_users: new_users, new_produtores: new_produtores, page_views:page_views})
     })
 })
 

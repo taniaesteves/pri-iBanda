@@ -2,12 +2,9 @@ extends layout_admin
 block content
     .col-sm-9.col-sm-offset-3.col-lg-10.col-lg-offset-2.main
       .row
-        
+
       // /.row
-      .row
-        .col-lg-12
-          
-      // /.row
+      hr
       .panel.panel-container
         .row
           .col-xs-6.col-md-4.col-lg-4.no-padding
@@ -30,7 +27,7 @@ block content
                 .text-muted Consultas à página
         // /.row
       .row
-        .col-md-12
+        .col-md-12        
           .panel.panel-default
             .panel-heading
               | Tráfego geral do site
@@ -59,27 +56,27 @@ block content
                 em.fa.fa-toggle-up
             .panel-body
               .canvas-wrapper
-                canvas#lineChartDemo.main-chart(height='200', width='1000')
+                canvas#lineChartDemo.main-chart(height='350', width='1000')
       // /.row
-      .row
-        .col-xs-6.col-md-4
-          .panel.panel-default
-            .panel-body.easypiechart-panel
-              h4 Novos Produtores
-              #easypiechart-blue.easypiechart(data-percent=testObj.new_productors_percent)
-                span.percent= testObj.new_productors_percent + "%"
-        .col-xs-6.col-md-4
-          .panel.panel-default
-            .panel-body.easypiechart-panel
-              h4 Novos utilizadores
-              #easypiechart-teal.easypiechart(data-percent=testObj.new_users_percent)
-                span.percent= testObj.new_users_percent + "%"
-        .col-xs-6.col-md-4
-          .panel.panel-default
-            .panel-body.easypiechart-panel
-              h4 Consultas à página
-              #easypiechart-red.easypiechart(data-percent=testObj.page_views_percent)
-                span.percent= testObj.page_views_percent  + "%"   
+        //-   .row
+        //-     .col-xs-6.col-md-4
+        //-       .panel.panel-default
+        //-         .panel-body.easypiechart-panel
+        //-           h4 Novos Produtores
+        //-           #easypiechart-blue.easypiechart(data-percent=testObj.new_productors_percent)
+        //-             span.percent= testObj.new_productors_percent + "%"
+        //-     .col-xs-6.col-md-4
+        //-       .panel.panel-default
+        //-         .panel-body.easypiechart-panel
+        //-           h4 Novos utilizadores
+        //-           #easypiechart-teal.easypiechart(data-percent=testObj.new_users_percent)
+        //-             span.percent= testObj.new_users_percent + "%"
+        //-     .col-xs-6.col-md-4
+        //-       .panel.panel-default
+        //-         .panel-body.easypiechart-panel
+        //-           h4 Consultas à página
+        //-           #easypiechart-red.easypiechart(data-percent=testObj.page_views_percent)
+        //-             span.percent= testObj.page_views_percent  + "%"   
       // /.row
       .row
         .col-md-6

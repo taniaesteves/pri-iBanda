@@ -9,37 +9,33 @@ block content
         .main-box.no-header.clearfix
           .main-box-body.clearfix
             .table-responsive
-              table.table.user-list#users
+              table.table.obra-list#obras
                 thead
                   tr
-                    th(onclick='sortTable(0)')
-                      span 
-                        b Tipo
                     th(onclick='sortTable(1)')
                       span 
-                        b Username
+                        b Título
                     th(onclick='sortTable(2)')
                       span 
-                        b Nome
+                        b Tipo
                     th(onclick='sortTable(3)')
                       span 
-                        b Email
+                        b Compositor
                     th
                       span 
                         b Editar
                 tbody
-                  each user in testObj.users
+                  each obra in testObj.obras
                     tr
-                      td= user.role                                            
-                      td= user.username
-                      td= user.name
-                      td= user.email
+                      td= obra.titulo                                            
+                      td= obra.tipo
+                      td= obra.compositor                      
                       td(style='width: 20%;')
                         a.table-link(href='#')
                           span.fa-stack
                             i.fa.fa-square.fa-stack-2x
                             i.fa.fa-search-plus.fa-stack-1x.fa-inverse
-                        a.table-link(href='/admin/edit/user/'+user._id)
+                        a.table-link(href='#')
                           span.fa-stack
                             i.fa.fa-square.fa-stack-2x
                             i.fa.fa-pencil.fa-stack-1x.fa-inverse
@@ -54,7 +50,7 @@ block content
     script.
         function sortTable(n) {
             var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-            table = document.getElementById("users");
+            table = document.getElementById("obras");
             switching = true;
             dir = "asc";
             while (switching) {

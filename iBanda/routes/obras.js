@@ -1,11 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var fs = require("fs");
-var JSZip = require("jszip");
-const fileUpload = require('express-fileupload');
 var Obra = require("../controllers/obra")
 var path = require("path")
-var unzip = require("unzip")
 const StreamZip = require('node-stream-zip');
 var extract = require('extract-zip')
 
@@ -100,14 +97,19 @@ router.post("/carregarFile", (req, res)=> {
                             .then(dados => {
                                 fs.access(filepath, error => {
                                     if (!error) {
-                                        fs.unlinkSync(filepath);
+                                        fs.unlink(filepath, (err) => {
+                                            // console.log("erros: " + err)
+                                            deleteFolderRecursive(filepathobra)
+                                            console.log(dados)
+                                            res.jsonp(dados)
+                                        })                                        
                                     } else {
                                         console.log(error);
                                     }
+
                                 });
-                                deleteFolderRecursive(filepathobra)
-                                console.log(dados)
-                                res.jsonp(dados)})
+                            })
+                                
                             .catch(erro => console.log('Erro na listagem: ' + erro))
                         }
                     })
