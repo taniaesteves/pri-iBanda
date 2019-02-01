@@ -190,6 +190,19 @@ header .src-area .src-btn{ position: absolute; top: 0; bottom: 0; left: 0; width
 .main-post2{ margin-top: -200px; padding: 20px 0px 20px; box-shadow: 0px 0px 5px rgba(0,0,0,.1); 
 	border-bottom: 1px solid #eee; background: #fff; }
 
+
+.main-post3{margin-top: 0px; margin-left: 10%; margin-right: -13%; padding: 70px 0px 60px; box-shadow: 0px 0px 5px rgba(0,0,0,.1); 
+	border-bottom: 1px solid #eee; background: #fff; }
+
+.main-post3 .title{ margin-bottom: 30px; }
+
+.main-post3 .post-top-area,
+.main-post3 .post-bottom-area{ margin: 0 70px; }
+
+.main-post3 .pre-title{ margin-bottom: 20px; color: #777; }
+
+.main-post3 .para{ margin: 30px 0; }
+
 .main-post .post-top-area,
 .main-post .post-bottom-area{ margin: 0 70px; }
 

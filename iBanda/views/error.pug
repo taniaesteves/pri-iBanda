@@ -1,6 +1,11 @@
 extends layout
 
 block content
+  link(rel='stylesheet', type='text/css', href='//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css')
+  link(rel='stylesheet', href='/stylesheets/main-styles.css')    
+  link(href='/stylesheets/responsive.css', rel='stylesheet')
+  
+  br
   h2= message
   h3= error.status
   pre #{error.stack}

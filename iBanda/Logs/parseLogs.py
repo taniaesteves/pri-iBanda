@@ -8,7 +8,7 @@ line = f.readline()
 # at a time, till the file is empty
 months = {    
     "Jan": 0, 
-    "Fev": 1, 
+    "Feb": 1, 
     "Mar": 2, 
     "Apr": 3, 
     "May": 4, 

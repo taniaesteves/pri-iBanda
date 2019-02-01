@@ -124,6 +124,38 @@ router.get('/noticias', (req, res) => {
 		})
 })
 
+router.get('/edit/user/:id', (req, res) => {
+	req.session.redirectTo = "/admin/utilizadores";
+	axios.get('http://localhost:3000/api/users/user/id/' + req.params.id, { headers: { "Authorization": 'Bearer ' + req.session.token } })
+		.then(response => {
+			if (req.session.email) {
+				loggedin = true;
+			} else loggedin = false;
+			testObj = {
+				originalUrl: req.originalUrl,
+				loggedin,
+				username: req.session.username,
+				user: response.data
+			}
+	res.render('editUser', testObj )
+	})
+})
+
+router.post('/edit/user/:id', (req, res) => {
+	req.session.redirectTo = "/admin";
+	axios.get('http://localhost:3000/api/admin/edit/user/' + req.params.id, { headers: { "Authorization": 'Bearer ' + req.session.token } })
+		//.then(response => {
+			res.redirect('/admin/noticias')
+			// res.render('adminNoticias', testObj)
+		//}).catch(erro => {
+			//if (erro.response) {
+				//if (erro.response.status == 401) return res.redirect('/login')
+				//console.log('Erro get /admin/ocultar/noticia por: ' + erro.response.data.info)
+			//}
+			//res.render('error', { error: erro, message: "Erro na listagem dos utilizadores por role!" })
+		//})
+})
+
 router.get('/ocultar/noticia/:nid', (req, res) => {
 	req.session.redirectTo = "/admin/noticias";
 	axios.get('http://localhost:3000/api/admin/ocultar/noticia/' + req.params.nid, { headers: { "Authorization": 'Bearer ' + req.session.token } })

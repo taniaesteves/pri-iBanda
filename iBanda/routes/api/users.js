@@ -25,6 +25,14 @@ router.get('/user/:username', auth.checkBasicAuthentication, (req, res) => {
         .catch(err => res.status(500).send('Erro na consulta de utilizador: ' + err))
 })
 
+
+router.get('/user/id/:id', auth.checkAdminAuthentication, (req, res) => {
+    console.log("ID = " + req.params.id)
+    User.getUserById(req.params.id)
+        .then(data => res.jsonp(data))
+        .catch(errors => res.status(500).send('Erro na listagem: ' + errors))
+});
+
 // SignUp
 router.post('/', User.validate('createUser'), (req, res, next) => {
     const errors = validationResult(req);

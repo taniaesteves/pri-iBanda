@@ -15,13 +15,13 @@ block content
                     th(onclick='sortTable(0)')
                       span 
                         b Tipo
-                    th(onclick='sortTable(0)')
+                    th(onclick='sortTable(1)')
                       span 
                         b Username
-                    th(onclick='sortTable(0)')
+                    th(onclick='sortTable(2)')
                       span 
                         b Nome
-                    th(onclick='sortTable(0)')
+                    th(onclick='sortTable(3)')
                       span 
                         b Email
                     th
@@ -39,7 +39,7 @@ block content
                           span.fa-stack
                             i.fa.fa-square.fa-stack-2x
                             i.fa.fa-search-plus.fa-stack-1x.fa-inverse
-                        a.table-link(href='#')
+                        a.table-link(href='/admin/edit/user/'+user._id)
                           span.fa-stack
                             i.fa.fa-square.fa-stack-2x
                             i.fa.fa-pencil.fa-stack-1x.fa-inverse
