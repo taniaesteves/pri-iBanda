@@ -112,12 +112,15 @@ router.get('/stats', auth.checkAdminAuthentication, (req, res) => {
                     for(var month in dataFromFile[key]["POST"][year]["total_req"])                    
                     total_eventos += dataFromFile[key]["POST"][year]["total_req"][month]
             }
+
+            if(key.startsWith("/"))
+                for(var year in dataFromFile[key]["GET"])      
+                    for(var month in dataFromFile[key]["GET"][year]["total_req"])                    
+                        page_views += dataFromFile[key]["GET"][year]["total_req"][month]
+
             
         }
-        if(dataFromFile["/obras"])
-            for(var year in dataFromFile["/"]["GET"])      
-                for(var month in dataFromFile["/"]["POST"][year]["total_req"])                    
-                    page_views += dataFromFile["/"]["POST"][year]["total_req"][month]
+        
 
         total_obras = 0
         for(v in get_obras) total_obras += get_obras[v];
@@ -177,6 +180,13 @@ router.get('/remove/user/:uid', auth.checkAdminAuthentication, (req, res) => {
         .then(data => res.jsonp(data))
         .catch(errors => res.status(500).send('Erro na listagem: ' + errors))
 });
+
+router.get('/remove/noticia/:id', auth.checkBasicAuthentication, function(req, res) {
+    Noticia.remove(req.params.id)
+        .then(dados => res.jsonp(dados))
+        .catch(erro => res.status(500).send('Erro na listagem: ' + erro))
+});
+
 
 // Get username by user id
 router.get('/user/id/:uid', auth.checkAdminAuthentication, (req, res) => {

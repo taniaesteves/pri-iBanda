@@ -9,7 +9,7 @@ router.get('/',function(req, res) {
         .catch(erro => res.status(500).send('Erro na listagem: ' + erro))
 });
 
-router.get('/:id', auth.checkBasicAuthentication, function(req, res) {
+router.get('/:id', function(req, res) {
     Noticia.getNoticiaById(req.params.id)
         .then(dados => res.jsonp(dados))
         .catch(erro => res.status(500).send('Erro na consulta: ' + erro))
@@ -20,6 +20,7 @@ router.get('/autor/:id', auth.checkBasicAuthentication, function(req, res) {
         .then(dados => res.jsonp(dados))
         .catch(erro => res.status(500).send('Erro na listagem: ' + erro))
 });
+
 
 router.post('/', auth.checkBasicAuthentication, function(req, res) {
     var noticia = {

@@ -1,0 +1,39 @@
+[
+    {
+        "tipo" : "Concerto",
+        "designacao" : "Concerto de Natal solidário",
+        "data": "30/12/2019",
+        "local": "Matosinhos",
+        "hinicio": "17:30",
+        "hfim": "20:00",
+        "informacoes": "Entrada gratuita."
+    },
+    {
+        "tipo" : "Procissão",
+        "designacao" : "Procissão das velas em Corroios",
+        "data": "11/02/2019",
+        "local": "Corroios",
+        "hinicio": "18:30",
+        "hfim": "20h",
+        "informacoes": "Um evento que traz milhares de fiéis à rua."
+    },
+    {
+        "tipo" : "Concerto",        
+        "designacao" : "Concerto no lar de idosos",
+        "data": "5/06/2020",
+        "local": "Lar de idosos de Vila Verde",
+        "hinicio": "21:00",
+        "hfim": "23:00",
+        "informacoes": "A pedido da Câmara Municipal de Vila Verde, vamos atuar durante duas horas, com petiscos no fim."
+    },
+    {
+        "tipo" : "Arruada",
+        "designacao" : "Arruada na festa Alvarinho",
+        "data": "26/04/2019",
+        "local": "Melgaço",
+        "hinicio": "14h",
+        "hfim": "15:45",
+        "informacoes": "Vai estar um dia de bastante calor, hidratem-se!"
+        
+    }
+]

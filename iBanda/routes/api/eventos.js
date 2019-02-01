@@ -9,7 +9,7 @@ router.get('/', auth.checkBasicAuthentication, function(req, res) {
         .catch(erro => res.status(500).send('Erro na listagem: ' + erro))
 });
 
-router.get('/test/:id', function(req, res) {
+router.get('/test/:id', auth.checkBasicAuthentication, function(req, res) {
     Evento.consultar(req.params.id)
         .then(dados => res.jsonp(dados))
         .catch(erro => res.status(500).send('Erro na consulta: ' + erro))

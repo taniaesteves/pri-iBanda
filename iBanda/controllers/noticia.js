@@ -29,6 +29,12 @@ module.exports.list = () =>{
       .exec()
   }
 
+module.exports.remove = (id) =>{
+    return Noticia
+        .deleteOne({_id: id})
+        .exec()
+}
+
 // Lista os eventos na data D
 module.exports.listDataExact = data => {
     return Noticia

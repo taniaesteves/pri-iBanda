@@ -4,9 +4,11 @@ var axios = require('axios')
 
 router.get('/', function(req, res) {
     console.log("eventos")
+    req.session.redirectTo = "/eventos";	
     axios.get('http://localhost:3000/api/eventos', { headers: { "Authorization": 'Bearer ' + req.session.token } })
         .then(eventos => res.render('events', {eventos: eventos.data}))
         .catch(erro => {
+            if (erro.response.status) return res.redirect('/login')
             console.log('Erro na listagem de eventos: ' + erro)
             res.render('error', {error: erro, message: "na listagem..."})
         })
@@ -21,6 +23,7 @@ router.get('/:id', function(req, res) {
     axios.get('http://localhost:3000/api/eventos/' + req.params.id, { headers: { "Authorization": 'Bearer ' + req.session.token } })
         .then(evento => res.render('evento', {evento: evento.data}))
         .catch(erro => {
+            if (erro.response.status) return res.redirect('/login')
             console.log('Erro na consulta do evento: ' + erro)
             res.render('error', {error: erro, message: "Meu erro..."})
         })
@@ -35,6 +38,7 @@ router.post('/', function(req, res) {
     axios.post('http://localhost:3000/api/eventos', params, { headers: { "Authorization": 'Bearer ' + req.session.token } })
         .then(()=> res.redirect('http://localhost:3000/eventos'))
         .catch(erro => {
+            if (erro.response.status) return res.redirect('/login')
             console.log('Erro na inserção do evento: ' + erro)
             res.render('error', {error: erro, message: "Meu erro ins..."})
         })

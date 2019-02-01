@@ -147,19 +147,22 @@ router.post("/carregarFile", (req, res)=> {
 }); 
 
 router.get('/', function(req, res) {
+    req.session.redirectTo = "/obras/";	
     console.log('ECAGALROASFD ')
-    axios.get('http://localhost:3000/api/obras')
+    axios.get('http://localhost:3000/api/obras', { headers: { "Authorization": 'Bearer ' + req.session.token } })
         .then(obras => res.render('obras', {obras: obras.data}))
         .catch(erro => {
+            if (erro.response.status) return res.redirect('/login')
             console.log('Erro na listagem de eventos: ' + erro)
             res.render('error', {error: erro, message: "na listagem..."})
         })
 });
 
 router.get('/obra/:id', function(req, res) {
-    axios.get('http://localhost:3000/api/obras/' + req.params.id)
+    axios.get('http://localhost:3000/api/obras/' + req.params.id, { headers: { "Authorization": 'Bearer ' + req.session.token } })
         .then(obras => res.render('obra', {obra: obras.data}))
         .catch(erro => {
+            // if (erro.response.status) return res.redirect('/login')
             console.log('Erro na listagem de obras: ' + erro)
             res.render('error', {error: erro, message: "na listagem..."})
         })

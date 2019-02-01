@@ -4,6 +4,7 @@ var axios = require('axios')
 var moment = require('moment');
 
 router.get('/', function(req, res) {
+    req.session.redirectTo = "/";	
     axios.get('http://localhost:3000/api/noticias', { headers: { "Authorization": 'Bearer ' + req.session.token } })
         .then(noticias => res.render('createNoticia', {noticias: noticias.data}))
         .catch(erro => {
@@ -12,6 +13,7 @@ router.get('/', function(req, res) {
             res.render('error', {error: erro, message: "na listagem..."})
         })
 });
+
 
 router.get('/criar-noticia', function(req, res) {
     res.render('criarNoticia')

@@ -22,6 +22,20 @@ router.get('/remove/user/:uid', function (req, res) {
 	})
 })
 
+router.get('/remove/noticia/:uid', function (req, res) {
+	req.session.redirectTo = '/admin/noticias/' + req.params.role;
+	axios.get('http://localhost:3000/api/admin/remove/noticia/' + req.params.uid, { headers: { "Authorization": 'Bearer ' + req.session.token } })
+	.then(response => {
+		console.log(JSON.stringify(response.data))
+		res.redirect('/admin/noticias')
+	})
+	.catch(erro => {
+		console.log("POST /singup Erro no registo do utilizador! " + JSON.stringify(erro.response.data.info));
+		req.flash('error', erro.response.data.info)
+		res.render('error', { error: erro, message: "Erro ao remover user!" })
+	})
+})
+
 // signup as admin
 router.get('/signup', function (req, res) {
 	res.render('signupAdmin', { expressFlash: req.flash('error'), sessionFlash: res.locals.sessionFlash });
@@ -245,7 +259,7 @@ router.get('/', (req, res) => {
 			testObj = {				
 				originalUrl: req.originalUrl,
 				loggedin,
-				page_views_num: page_views,
+				page_views_num: response.data.page_views,
 				new_productors_num: response.data.new_produtores,								
 				new_users_num: response.data.new_users,
 				username: req.session.username,

@@ -84,7 +84,7 @@ app.use('/eventos', eventosRouter);
 app.use('/users', usersRouter);
 app.use('/noticias', noticiasRouter);
 app.use('/admin', adminRouter)
-app.use('/obras', obrasRouter)
+
 
 app.use(addRequestId);
 
@@ -115,6 +115,7 @@ app.use('/api/noticias', noticiasAPIRouter)
 app.use('/api/users', usersAPIRouter)
 app.use('/api/admin', adminAPIRouter)
 app.use('/api/obras', obrasAPIRouter)
+app.use('/obras', obrasRouter)
 
 
 

@@ -33,7 +33,7 @@ block content
   body
     section.blog-area.section
       .container
-        .row
+        .row          
           each noticia in noticias 
             if(noticia.visivel===true)
               .col-lg-4.col-md-6
@@ -67,3 +67,4 @@ block content
                       //-     a(href='#')
                       //-       i.ion-eye
                       //-       | 138
+      a.user-link(href="/noticias/criar-noticia") Inserir notícia
