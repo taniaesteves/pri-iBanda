@@ -69,7 +69,6 @@ router.get('/newusers', auth.checkAdminAuthentication, (req, res) => {
     })
 })
 
-
 // Get users by role
 router.get('/users/role/:role', auth.checkAdminAuthentication, (req, res) => {
     User.listByRole(req.params.role)
