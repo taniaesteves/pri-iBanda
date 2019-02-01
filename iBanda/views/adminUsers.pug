@@ -1,0 +1,92 @@
+extends layout_admin
+block content
+  link(rel='stylesheet', type='text/css', href='//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css')
+  link(rel='stylesheet', type='text/css', href='/stylesheets/admin-users.css')
+  hr
+  .container.bootstrap.snippet
+    .row
+      .col-lg-12
+        .main-box.no-header.clearfix
+          .main-box-body.clearfix
+            .table-responsive
+              table.table.user-list#users
+                thead
+                  tr
+                    th(onclick='sortTable(0)')
+                      span 
+                        b Tipo
+                    th(onclick='sortTable(0)')
+                      span 
+                        b Username
+                    th(onclick='sortTable(0)')
+                      span 
+                        b Nome
+                    th(onclick='sortTable(0)')
+                      span 
+                        b Email
+                    th
+                      span 
+                        b Editar
+                tbody
+                  each user in testObj.users
+                    tr
+                      td= user.role                                            
+                      td= user.username
+                      td= user.name
+                      td= user.email
+                      td(style='width: 20%;')
+                        a.table-link(href='#')
+                          span.fa-stack
+                            i.fa.fa-square.fa-stack-2x
+                            i.fa.fa-search-plus.fa-stack-1x.fa-inverse
+                        a.table-link(href='#')
+                          span.fa-stack
+                            i.fa.fa-square.fa-stack-2x
+                            i.fa.fa-pencil.fa-stack-1x.fa-inverse
+                        a.table-link.danger(href='#')
+                          span.fa-stack
+                            i.fa.fa-square.fa-stack-2x
+                            i.fa.fa-trash-o.fa-stack-1x.fa-inverse
+    hr
+    hr
+    hr
+    script.
+        function sortTable(n) {
+            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+            table = document.getElementById("users");
+            switching = true;
+            dir = "asc";
+            while (switching) {
+                switching = false;
+                rows = table.rows;
+                for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+                    x = rows[i].getElementsByTagName("TD")[n];
+                    y = rows[i + 1].getElementsByTagName("TD")[n];
+                    if (dir == "asc") {
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch= true;
+                        break;
+                        }
+                    } else if (dir == "desc") {
+                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    switchcount ++;
+                } else {
+                    if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                    }
+                }
+            }
+        }
+
+                               
+

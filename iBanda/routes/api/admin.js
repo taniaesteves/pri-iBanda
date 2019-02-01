@@ -3,6 +3,7 @@ const passport = require('passport')
 var router = express.Router()
 var User = require('../../controllers/user')
 var auth = require("../../authentication/aut")
+var Noticia = require('../../controllers/noticia')
 var fs = require("fs")
 const {validationResult} = require('express-validator/check')
 
@@ -32,6 +33,21 @@ router.get('/stats', auth.checkAdminAuthentication, (req, res) => {
         res.jsonp({get_info: get_info, post_info: post_info})
     })
 })
+
+
+router.get('/ocultar/noticia/:nid', auth.checkAdminAuthentication, (req, res) => {
+    Noticia.getNoticiaById(req.params.nid)
+    .then(noticia => {
+        console.log(noticia)
+        Noticia.edit(noticia.id, {'visivel': !noticia.visivel})
+        .then(dados => res.jsonp(dados))
+        .catch(erro => res.status(500).send('Erro ao editar noticia: ' + erro))
+
+    })
+    .catch(erro => res.status(500).send('Erro ao ocultar noticia: ' + erro))
+    
+})
+
 
 router.get('/newusers', auth.checkAdminAuthentication, (req, res) => {    
     //TODO: fazer isto na callback 

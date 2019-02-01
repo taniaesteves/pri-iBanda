@@ -101,10 +101,10 @@ router.get('/role/:role', (req, res) => {
 
 // });
 
-router.get('/utilizadores', (req, res) => {
-	req.session.redirectTo = "/admin/utilizadores";
-	// axios.get('http://localhost:3000/api/admin/stats', { headers: { "Authorization": 'Bearer ' + req.session.token } })
-	// 	.then(response => {
+router.get('/noticias', (req, res) => {
+	req.session.redirectTo = "/admin/noticias";
+	axios.get('http://localhost:3000/api/noticias/', { headers: { "Authorization": 'Bearer ' + req.session.token } })
+		.then(response => {
 			if (req.session.email) {
 				loggedin = true;
 			} else loggedin = false;
@@ -112,16 +112,54 @@ router.get('/utilizadores', (req, res) => {
 				originalUrl: req.originalUrl,
 				loggedin,
 				username: req.session.username,
-				
+				noticias: response.data
+			}
+			res.render('adminNoticias', testObj)
+		}).catch(erro => {
+			if (erro.response) {
+				if (erro.response.status == 401) return res.redirect('/login')
+				console.log('Erro get /admin/noticias por: ' + erro.response.data.info)
+			}
+			res.render('error', { error: erro, message: "Erro na listagem dos utilizadores por role!" })
+		})
+})
+
+router.get('/ocultar/noticia/:nid', (req, res) => {
+	req.session.redirectTo = "/admin/noticias";
+	axios.get('http://localhost:3000/api/admin/ocultar/noticia/' + req.params.nid, { headers: { "Authorization": 'Bearer ' + req.session.token } })
+		.then(response => {
+			res.redirect('/admin/noticias')
+			// res.render('adminNoticias', testObj)
+		}).catch(erro => {
+			if (erro.response) {
+				if (erro.response.status == 401) return res.redirect('/login')
+				console.log('Erro get /admin/ocultar/noticia por: ' + erro.response.data.info)
+			}
+			res.render('error', { error: erro, message: "Erro na listagem dos utilizadores por role!" })
+		})
+})
+
+router.get('/utilizadores', (req, res) => {
+	req.session.redirectTo = "/admin/utilizadores";
+	axios.get('http://localhost:3000/api/users/', { headers: { "Authorization": 'Bearer ' + req.session.token } })
+		.then(response => {
+			if (req.session.email) {
+				loggedin = true;
+			} else loggedin = false;
+			testObj = {
+				originalUrl: req.originalUrl,
+				loggedin,
+				username: req.session.username,
+				users: response.data
 			}
 			res.render('adminUsers', testObj)
-		// }).catch(erro => {
-		// 	if (erro.response) {
-		// 		if (erro.response.status == 401) return res.redirect('/login')
-		// 		console.log('Erro get /admin por: ' + erro.response.data.info)
-		// 	}
-		// 	res.render('error', { error: erro, message: "Erro na listagem dos utilizadores por role!" })
-		// })
+		}).catch(erro => {
+			if (erro.response) {
+				if (erro.response.status == 401) return res.redirect('/login')
+				console.log('Erro get /admin por: ' + erro.response.data.info)
+			}
+			res.render('error', { error: erro, message: "Erro na listagem dos utilizadores por role!" })
+		})
 })
 
 router.get('/', (req, res) => {

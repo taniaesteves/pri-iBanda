@@ -1,0 +1,115 @@
+extends layout_admin
+block content
+  link(rel='stylesheet', type='text/css', href='//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css')
+  link(rel='stylesheet', type='text/css', href='/stylesheets/admin-users.css')
+  hr
+  .container.bootstrap.snippet
+    .row
+      .col-lg-12
+        .main-box.no-header.clearfix
+          .main-box-body.clearfix
+            .table-responsive
+              table.table.user-list#noticias
+                thead
+                  tr
+                    th(onclick='sortTable(0)')
+                      span 
+                        b Título
+                    th(onclick='sortTable(0)')
+                      span 
+                        b Data
+                    th(onclick='sortTable(0)')
+                      span 
+                        b Descrição
+                    th(onclick='sortTable(0)')
+                      span 
+                        b Autor
+                    th
+                      span 
+                        b Editar
+                tbody
+                  each noticia in testObj.noticias                    
+                    tr
+                      if noticia.visivel === false
+                        td(style='background-color:#DCDCDC;color:#808080;width: 15%;')= noticia.titulo
+                        td(style='background-color:#DCDCDC;color:#808080;width: 10%;')= noticia.data
+                        td(style='background-color:#DCDCDC;color:#808080;')= noticia.descricao
+                        td(style='background-color:#DCDCDC;color:#808080;')= noticia.autor
+                        td(style='background-color:#DCDCDC;color:#808080; width: 10%;')
+                          a.table-link(href='/admin/ocultar/noticia/' + noticia._id)
+                            span.fa-stack
+                              i.fa.fa-square.fa-stack-2x
+                              i.fa.fa-eye.fa-stack-1x.fa-inverse
+                          a.table-link(href='/admin/editar/noticia/' + noticia._id)
+                            span.fa-stack
+                              i.fa.fa-square.fa-stack-2x
+                              i.fa.fa-pencil.fa-stack-1x.fa-inverse
+                          a.table-link.danger(href='/admin/delete/noticia/' + noticia._id)
+                            span.fa-stack
+                              i.fa.fa-square.fa-stack-2x
+                              i.fa.fa-trash-o.fa-stack-1x.fa-inverse
+                      else
+                        td(style='background-color:white;width: 15%;')= noticia.titulo
+                        td(style='background-color:white;width: 10%;')= noticia.data
+                        td(style='background-color:white;')= noticia.descricao
+                        td(style='background-color:white;')= noticia.autor
+                        td(style='background-color:white; width: 10%;')
+                          a.table-link(href='/admin/ocultar/noticia/' + noticia._id)
+                            span.fa-stack
+                              i.fa.fa-square.fa-stack-2x
+                              i.fa.fa-eye.fa-stack-1x.fa-inverse
+                          a.table-link(href='/admin/editar/noticia/' + noticia._id)
+                            span.fa-stack
+                              i.fa.fa-square.fa-stack-2x
+                              i.fa.fa-pencil.fa-stack-1x.fa-inverse
+                          a.table-link.danger(href='/admin/delete/noticia/' + noticia._id)
+                            span.fa-stack
+                              i.fa.fa-square.fa-stack-2x
+                              i.fa.fa-trash-o.fa-stack-1x.fa-inverse
+    hr
+    hr
+    hr
+    script.
+
+        $("#button").click(function(){ 
+            $("#go").css("background-color","yellow");
+        });
+        function sortTable(n) {
+            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+            table = document.getElementById("noticias");
+            switching = true;
+            dir = "asc";
+            while (switching) {
+                switching = false;
+                rows = table.rows;
+                for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+                    x = rows[i].getElementsByTagName("TD")[n];
+                    y = rows[i + 1].getElementsByTagName("TD")[n];
+                    if (dir == "asc") {
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch= true;
+                        break;
+                        }
+                    } else if (dir == "desc") {
+                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    switchcount ++;
+                } else {
+                    if (switchcount == 0 && dir == "asc") {
+                    dir = "desc";
+                    switching = true;
+                    }
+                }
+            }
+        }
+
+                               
+
