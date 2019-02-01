@@ -5,6 +5,8 @@ var Obra = require("../controllers/obra")
 var path = require("path")
 const StreamZip = require('node-stream-zip');
 var extract = require('extract-zip')
+var axios = require('axios');
+var tmpdir = require('os').tmpdir();
 
 var deleteFolderRecursive = function(path) {
     if (fs.existsSync(path)) {
@@ -101,7 +103,7 @@ router.post("/carregarFile", (req, res)=> {
                                             // console.log("erros: " + err)
                                             deleteFolderRecursive(filepathobra)
                                             console.log(dados)
-                                            res.jsonp(dados)
+                                            res.redirect('/obras')
                                         })                                        
                                     } else {
                                         console.log(error);
@@ -141,11 +143,36 @@ router.post("/carregarFile", (req, res)=> {
             })
         }
     })
-   
-        
-        
-
-      
+       
 }); 
+
+router.get('/', function(req, res) {
+    console.log('ECAGALROASFD ')
+    axios.get('http://localhost:3000/api/obras')
+        .then(obras => res.render('obras', {obras: obras.data}))
+        .catch(erro => {
+            console.log('Erro na listagem de eventos: ' + erro)
+            res.render('error', {error: erro, message: "na listagem..."})
+        })
+});
+
+router.get('/obra/:id', function(req, res) {
+    axios.get('http://localhost:3000/api/obras/' + req.params.id)
+        .then(obras => res.render('obra', {obra: obras.data}))
+        .catch(erro => {
+            console.log('Erro na listagem de obras: ' + erro)
+            res.render('error', {error: erro, message: "na listagem..."})
+        })
+
+});
+
+router.get('/:oid/:path', function(req, res, next) {
+    var filePath = 'obras/'+req.params.oid+'/'+req.params.path
+    var filepath2 = path.join(__dirname,"/../")
+    console.log(filepath2+filePath)
+       res.download(filepath2+filePath)
+  });
+    
+
 
 module.exports = router;

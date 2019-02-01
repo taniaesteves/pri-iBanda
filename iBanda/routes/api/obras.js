@@ -9,4 +9,9 @@ router.get('/', function(req, res) {
         .catch(erro => res.status(500).send('Erro na listagem: ' + erro))
 });
 
+router.get('/:id', function(req, res) {
+    Obra.getObraById(req.params.id)
+        .then(dados => res.jsonp(dados))
+        .catch(erro => res.status(500).send('Erro na listagem: ' + erro))
+});
 module.exports = router;
