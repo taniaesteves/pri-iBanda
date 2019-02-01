@@ -9,7 +9,7 @@ const {validationResult} = require('express-validator/check')
 
 router.get('/stats', auth.checkAdminAuthentication, (req, res) => {    
     //TODO: fazer isto na callback 
-    console.log("inside /api/admin/stats " + req.user)
+    // console.log("inside /api/admin/stats " + req.user)
     fs.readFile('Logs/stats_by_url.json', 'utf8', (err, data) => {
         if (err) {            
             const error = new Error(err)
@@ -47,11 +47,85 @@ router.get('/stats', auth.checkAdminAuthentication, (req, res) => {
         page_views = 0
         if(dataFromFile["/"])
             for(var year in dataFromFile["/"]["GET"])      
-                for(var month in dataFromFile[url]["POST"][year]["total_req"])                    
-                    page_views += dataFromFile[url]["POST"][year]["total_req"][month]
+                for(var month in dataFromFile[url]["GET"][year]["total_req"])                    
+                    page_views += dataFromFile[url]["GET"][year]["total_req"][month]
 
-         console.log("Total gets: " + get_info + " total posts: " + post_info)
-        res.jsonp({get_info: get_info, post_info: post_info, new_users: new_users, new_produtores: new_produtores, page_views:page_views})
+        get_obras = [0,0,0,0,0,0,0,0,0,0,0,0];
+        post_obras = [0,0,0,0,0,0,0,0,0,0,0,0]; 
+        total_users = 0
+        total_produtores = 0
+        total_admin = 0
+        total_eventos = 0
+        for(key in dataFromFile){
+            // console.log(key)
+            if(key.startsWith("/obras/")){
+                //do something
+                for(var year in dataFromFile[key]["GET"])      
+                for(var month in dataFromFile[key]["GET"][year]["total_req"]) {              
+                    get_obras[month] += dataFromFile[key]["GET"][year]["total_req"][month]
+                    // console.log("get_obras: " + dataFromFile[key]["GET"][year]["total_req"][month]);
+                }
+
+            for(var year in dataFromFile[key]["POST"])      
+                for(var month in dataFromFile[key]["POST"][year]["total_req"])   {                  
+                    post_obras[month] += dataFromFile[key]["POST"][year]["total_req"][month]
+                    // console.log("post_obras: " + dataFromFile[key]["POST"][year]["total_req"][month]);
+                }
+            }
+                    
+            if(key.startsWith("/users")){           
+                //do something
+                for(var year in dataFromFile[key]["GET"])      
+                    for(var month in dataFromFile[key]["GET"][year]["total_req"])                    
+                    total_users += dataFromFile[key]["GET"][year]["total_req"][month]
+                for(var year in dataFromFile[key]["POST"])      
+                    for(var month in dataFromFile[key]["POST"][year]["total_req"])                    
+                    total_users += dataFromFile[key]["POST"][year]["total_req"][month]
+            }
+            
+            if(key.startsWith("/produtor")){       
+                //do something
+                for(var year in dataFromFile[key]["GET"])      
+                    for(var month in dataFromFile[key]["GET"][year]["total_req"])                    
+                    total_produtores += dataFromFile[key]["GET"][year]["total_req"][month]
+                for(var year in dataFromFile[key]["POST"])      
+                    for(var month in dataFromFile[key]["POST"][year]["total_req"])                    
+                    total_produtores += dataFromFile[key]["POST"][year]["total_req"][month]
+            }
+            
+            if(key.startsWith("/admin")){
+                //do something
+                for(var year in dataFromFile[key]["GET"])      
+                    for(var month in dataFromFile[key]["GET"][year]["total_req"])                    
+                    total_admin += dataFromFile[key]["GET"][year]["total_req"][month]
+                for(var year in dataFromFile[key]["POST"])      
+                    for(var month in dataFromFile[key]["POST"][year]["total_req"])                    
+                    total_admin += dataFromFile[key]["POST"][year]["total_req"][month]
+            }
+            
+            if(key.startsWith("/eventos")){
+                //do something
+                for(var year in dataFromFile[key]["GET"])      
+                    for(var month in dataFromFile[key]["GET"][year]["total_req"])                    
+                        total_eventos += dataFromFile[key]["GET"][year]["total_req"][month]
+                for(var year in dataFromFile[key]["POST"])      
+                    for(var month in dataFromFile[key]["POST"][year]["total_req"])                    
+                    total_eventos += dataFromFile[key]["POST"][year]["total_req"][month]
+            }
+            
+        }
+        if(dataFromFile["/obras"])
+            for(var year in dataFromFile["/"]["GET"])      
+                for(var month in dataFromFile["/"]["POST"][year]["total_req"])                    
+                    page_views += dataFromFile["/"]["POST"][year]["total_req"][month]
+
+        total_obras = 0
+        for(v in get_obras) total_obras += get_obras[v];
+        for(v in post_obras) total_obras += post_obras[v];
+        pie_chart = [total_users, total_produtores, total_admin, total_obras, total_eventos]
+
+        //  console.log("Total gets: " + get_info + " total posts: " + post_info)
+        res.jsonp({get_info: get_info, post_info: post_info, new_users: new_users, new_produtores: new_produtores, page_views:page_views,get_obras:get_obras, post_obras:post_obras, pie_chart:pie_chart})
     })
 })
 
@@ -59,7 +133,7 @@ router.get('/stats', auth.checkAdminAuthentication, (req, res) => {
 router.get('/ocultar/noticia/:nid', auth.checkAdminAuthentication, (req, res) => {
     Noticia.getNoticiaById(req.params.nid)
     .then(noticia => {
-        console.log(noticia)
+        // console.log(noticia)
         Noticia.edit(noticia.id, {'visivel': !noticia.visivel})
         .then(dados => res.jsonp(dados))
         .catch(erro => res.status(500).send('Erro ao editar noticia: ' + erro))
@@ -72,7 +146,7 @@ router.get('/ocultar/noticia/:nid', auth.checkAdminAuthentication, (req, res) =>
 
 router.get('/newusers', auth.checkAdminAuthentication, (req, res) => {    
     //TODO: fazer isto na callback 
-    console.log("inside /api/admin/stats " + req.user)
+    // console.log("inside /api/admin/stats " + req.user)
     fs.readFile('Logs/stats_by_url.json', 'utf8', (err, data) => {
         if (err) {            
             const error = new Error(err)
@@ -97,9 +171,16 @@ router.get('/users/role/:role', auth.checkAdminAuthentication, (req, res) => {
         .catch(errors => res.status(500).send('Erro na listagem: ' + errors))
 });
 
+
+router.get('/remove/user/:uid', auth.checkAdminAuthentication, (req, res) => {
+    User.removeByID(req.params.uid)
+        .then(data => res.jsonp(data))
+        .catch(errors => res.status(500).send('Erro na listagem: ' + errors))
+});
+
 // Get username by user id
 router.get('/user/id/:uid', auth.checkAdminAuthentication, (req, res) => {
-    console.log("get username: " + JSON.stringify(req.params))
+    // console.log("get username: " + JSON.stringify(req.params))
     User.getUserById(req.params.uid)
         .then(data => res.jsonp(data.username))
         .catch(err => {

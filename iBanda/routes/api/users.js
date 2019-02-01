@@ -8,6 +8,7 @@ var auth = require("../../authentication/aut")
 const {validationResult} = require('express-validator/check')
 
 
+
 // Get all users
 router.get('/', auth.checkBasicAuthentication, (req, res) => {
     console.log("/users")

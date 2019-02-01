@@ -42,9 +42,11 @@ module.exports.listByRole = role => {
 //  return User.create(user)
 // }
 
-// module.exports.remove = (id) =>{
-
-// }
+module.exports.removeByID = (id) =>{
+	return User
+		.deleteOne({_id: id})
+		.exec()
+}
 
 module.exports.validate = (method) => {
 	switch (method) {
