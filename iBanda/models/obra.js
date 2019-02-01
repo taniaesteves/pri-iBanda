@@ -2,23 +2,23 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
     var PartituraSchema = new Schema ({
-        Path : String, 
-        Voz : String,
-        Clave : String,
-        Afinacao : String
+        path : String, 
+        voz : String,
+        clave : String,
+        afinacao : String
     });
 
     var IntrumentoSchema = new Schema ({
-        Nome : String,
-        Partitura : PartituraSchema
+        nome : String,
+        partitura : PartituraSchema
     });
 
     var ObraSchema = new Schema ({
         id : String,
-        Titulo : String,
-        Tipo : String,
-        Compositor : String,
-        Instrumentos : [IntrumentoSchema]
+        titulo : String,
+        tipo : String,
+        compositor : String,
+        instrumentos : [IntrumentoSchema]
     })
 
     module.exports = mongoose.model('Obra', ObraSchema, 'obra');

@@ -10,7 +10,8 @@ var session = require('express-session')
 var FileStore = require('session-file-store')(session);
 var flash = require('express-flash')
 const morgan = require('morgan');
-
+const fileUpload = require('express-fileupload')
+var bodyParser = require('body-parser');
 
 
 // const cors = require('cors');
@@ -27,6 +28,7 @@ var eventosRouter = require('./routes/eventos');
 var noticiasRouter = require('./routes/noticias');
 var usersRouter = require('./routes/users');
 var adminRouter = require('./routes/admin');
+var obrasRouter = require('./routes/obras');
 
 var app = express();
 
@@ -34,6 +36,10 @@ var app = express();
 mongoose.connect('mongodb://127.0.0.1:27017/ibanda', {useNewUrlParser:true})
   .then(()=> {console.log('Mongo ready: ' + mongoose.connection.readyState)})
   .catch(error => console.log("Erro de conexão: " + error))
+
+// Update files
+app.use(fileUpload())
+
 
 // Configuração da sessão
 app.use(session({
@@ -63,8 +69,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 app.use(flash())
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 // app.use(cors({
@@ -77,6 +83,7 @@ app.use('/eventos', eventosRouter);
 app.use('/users', usersRouter);
 app.use('/noticias', noticiasRouter);
 app.use('/admin', adminRouter)
+app.use('/obras', obrasRouter)
 
 app.use(addRequestId);
 
