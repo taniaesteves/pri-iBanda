@@ -14,19 +14,17 @@ html(lang='en')
   body
     header
       .container-fluid.position-relative.no-side-padding
-        a.logo(href='#')
+        a.logo(href='/')
           h3 iBanda
         .menu-nav-icon(data-nav-menu='#main-menu')
           i.ion-navicon
         ul#main-menu.main-menu.visible-on-click
           li
-            a(href='/') Início
+            a(href='/') Home
           li
-            a(href='#') Notícias
+            a(href='/eventos') Eventos 
           li
-            a(href='#') Eventos 
-          li
-            a(href='#') Obras
+            a(href='/obras') Obras
                   
         // main-menu
         .menu-nav-icon(data-nav-menu='#main-menu2')
@@ -41,15 +39,7 @@ html(lang='en')
         //-     input.src-input(type='text', placeholder='Type of search')
       // conatiner
     block content
-    // section
-    footer
-      .container
-        .row
-          .col-sm-12
-              
-              p.back-link 
-                | iBanda @ 2019. All rights reserved. Designed by 
-                a(href='https://colorlib.com', target='_blank') Colorlib
+
           // footer-section
           // col-lg-4 col-md-6
 

@@ -7,6 +7,7 @@ router.get('/', function(req, res) {
     axios.get('http://localhost:3000/api/noticias', { headers: { "Authorization": 'Bearer ' + req.session.token } })
         .then(noticias => res.render('createNoticia', {noticias: noticias.data}))
         .catch(erro => {
+            if (erro.response.status) return res.redirect('/login')
             console.log('Erro na listagem de noticias: ' + erro)
             res.render('error', {error: erro, message: "na listagem..."})
         })
@@ -42,6 +43,7 @@ router.get('/:id', function(req, res) {
     axios.get('http://localhost:3000/api/noticias/' + req.params.id, { headers: { "Authorization": 'Bearer ' + req.session.token } })
         .then(noticia => res.render('noticia', {noticia: noticia.data}))
         .catch(erro => {
+            if (erro.response.status) return res.redirect('/login')
             console.log('Erro na consulta da noticia: ' + erro)
             res.render('error', {error: erro, message: "Meu erro..."})
         })
@@ -51,6 +53,7 @@ router.get('/:data', function(req, res) {
     axios.get('http://localhost:3000/api/noticias/' + req.params.data, { headers: { "Authorization": 'Bearer ' + req.session.token } })
         .then(noticia => res.render('noticia', {noticia: noticia.data}))
         .catch(erro => {
+            if (erro.response.status) return res.redirect('/login')
             console.log('Erro na consulta da noticia: ' + erro)
             res.render('error', {error: erro, message: "Meu erro..."})
         })
@@ -61,6 +64,7 @@ router.get('/autor/:id', function(req,res){
     axios.get('http://localhost:3000/api/noticias/' + req.params.id, { headers: { "Authorization": 'Bearer ' + req.session.token } })
         .then(noticia =>  res.render('noticia', {noticia: noticia.autor}))
         .catch(erro => {
+            if (erro.response.status) return res.redirect('/login')
             console.log('Erro na consulta da noticia: ' + erro)
             res.render('error', {error: erro, message: "Meu erro..."})
         })

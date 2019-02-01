@@ -20,7 +20,6 @@ router.get('/', auth.checkBasicAuthentication, (req, res) => {
 //TODO: deixar apenas procurar por utilizadores ou produtores
 // GET /api/users/:username
 router.get('/user/:username', auth.checkBasicAuthentication, (req, res) => {
-    console.log("/user/:username")
     User.getUserByUsername(req.params.username)
         .then(data => res.jsonp(data))
         .catch(err => res.status(500).send('Erro na consulta de utilizador: ' + err))
@@ -28,7 +27,6 @@ router.get('/user/:username', auth.checkBasicAuthentication, (req, res) => {
 
 
 router.get('/user/id/:id', auth.checkAdminAuthentication, (req, res) => {
-    console.log("ID = " + req.params.id)
     User.getUserById(req.params.id)
         .then(data => res.jsonp(data))
         .catch(errors => res.status(500).send('Erro na listagem: ' + errors))

@@ -3,7 +3,7 @@ var router = express.Router();
 var Noticia = require('../../controllers/noticia')
 var auth = require("../../authentication/aut")
 
-router.get('/', auth.checkBasicAuthentication,function(req, res) {
+router.get('/',function(req, res) {
     Noticia.list()
         .then(dados => res.jsonp(dados))
         .catch(erro => res.status(500).send('Erro na listagem: ' + erro))
