@@ -33,7 +33,7 @@ var obrasRouter = require('./routes/obras');
 var app = express();
 
 // Base de dados
-mongoose.connect('mongodb://127.0.0.1:27018/ibanda', {useNewUrlParser:true})
+mongoose.connect('mongodb://127.0.0.1:27017/ibanda', {useNewUrlParser:true})
   .then(()=> {console.log('Mongo ready: ' + mongoose.connection.readyState)})
   .catch(error => console.log("Erro de conexão: " + error))
 
