@@ -8,7 +8,6 @@ var path = require("path")
 var unzip = require("unzip")
 const StreamZip = require('node-stream-zip');
 var extract = require('extract-zip')
-var mv = require('mv')
 
 var deleteFolderRecursive = function(path) {
     if (fs.existsSync(path)) {

@@ -8,7 +8,7 @@ router.get('/', function(req, res) {
         .catch(erro => res.status(500).send('Erro na listagem: ' + erro))
 });
 
-router.get('/:id', function(req, res) {
+router.get('/test/:id', function(req, res) {
     Evento.consultar(req.params.id)
         .then(dados => res.jsonp(dados))
         .catch(erro => res.status(500).send('Erro na consulta: ' + erro))
@@ -33,8 +33,12 @@ router.get('/dataEx/:d', function(req, res) {
 });
 
 router.post('/', function(req, res) {
-    // console.log("eventos: " + JSON.stringify(req.body))
-    Evento.inserir(req.body)
+    var params = {
+		data: req.body.data, hinicio: req.body.hinicio, hfim: req.body.hfim,
+        tipo: req.body.tipo, designacao: req.body.designacao, local: req.body.local,
+        informacoes: req.body.informacoes}
+    console.log("eventos: " + JSON.stringify(req.body))
+    Evento.inserir(params)
         .then(dados => res.jsonp(dados))
         .catch(erro => res.status(500).send('Erro na listagem: ' + erro))
 });

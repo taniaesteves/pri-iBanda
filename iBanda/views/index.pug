@@ -35,34 +35,35 @@ block content
       .container
         .row
           each noticia in noticias 
-            .col-lg-4.col-md-6
-              .card.h-100
-                .single-post.post-style-2.post-style-3
-                  .blog-info
-                    if noticia.pretitulo
-                      h6.pre-title
-                        b= noticia.pretitulo
-                    h4.title
-                      a(href="/noticias/"+noticia._id)
-                        b= noticia.titulo
-                    p= noticia.descricao
-                    .avatar-area
-                      //- a.avatar(href='#')
-                      //-   img(src='images/icons8-team-355979.jpg', alt='Profile Image')
-                      .right-area
-                        a.name(href='#')
-                          b= noticia.autor
-                        h6.date(href='#')= noticia.data
-                    //- ul.post-footer
-                    //-   li
-                    //-     a(href='#')
-                    //-       i.ion-heart
-                    //-       | 57
-                    //-   li
-                    //-     a(href='#')
-                    //-       i.ion-chatbubble
-                    //-       | 6
-                    //-   li
-                    //-     a(href='#')
-                    //-       i.ion-eye
-                    //-       | 138
+            if(noticia.visivel===true)
+              .col-lg-4.col-md-6
+                .card.h-100
+                  .single-post.post-style-2.post-style-3
+                    .blog-info
+                      if noticia.pretitulo
+                        h6.pre-title
+                          b= noticia.pretitulo
+                      h4.title
+                        a(href="/noticias/"+noticia._id)
+                          b= noticia.titulo
+                      p= noticia.descricao
+                      .avatar-area
+                        //- a.avatar(href='#')
+                        //-   img(src='images/icons8-team-355979.jpg', alt='Profile Image')
+                        .right-area
+                          a.name(href='#')
+                            b= noticia.autor
+                          h6.date(href='#')= noticia.data
+                      //- ul.post-footer
+                      //-   li
+                      //-     a(href='#')
+                      //-       i.ion-heart
+                      //-       | 57
+                      //-   li
+                      //-     a(href='#')
+                      //-       i.ion-chatbubble
+                      //-       | 6
+                      //-   li
+                      //-     a(href='#')
+                      //-       i.ion-eye
+                      //-       | 138

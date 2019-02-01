@@ -14,23 +14,22 @@ html(lang='en')
   body
     header
       .container-fluid.position-relative.no-side-padding
-        a.logo(href='#')
+        a.logo(href='/')
           h3 iBanda
         .menu-nav-icon(data-nav-menu='#main-menu')
           i.ion-navicon
         ul#main-menu.main-menu.visible-on-click
           li
-            a(href='/') Início
+            a(href='/') Home
           li
-            a(href='#') Notícias
+            a(href='/eventos') Eventos 
           li
-            a(href='#') Eventos 
-          li
-            a(href='#') Obras
+            a(href='/obras') Obras
                   
         // main-menu
         .menu-nav-icon(data-nav-menu='#main-menu2')
           i.ion-navicon
+        if(user)
         ul#main-menu2.main-menu2.visible-on-click
           li
             a(href='/login') Login

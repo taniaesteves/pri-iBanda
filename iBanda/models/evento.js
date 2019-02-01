@@ -1,14 +1,10 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var HorarioSchema = new Schema({
-    hinicio : String,
-    hfim : String
-})
-
 var EventoSchema = new Schema({
     data : String,
-    horario : HorarioSchema,
+    hinicio : String,
+    hfim : String,
     tipo : String,
     designacao : String,
     local : String,
