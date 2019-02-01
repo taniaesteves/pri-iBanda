@@ -1,84 +1,135 @@
 doctype html
-html
+html(lang='en')
   head
-    meta(charset='utf-8')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
     title iBanda - Dashboard
-    link(href='/stylesheets/bootstrap.min.css', rel='stylesheet')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(charset='UTF-8')
+    // Font
+    //- link(href='https://fonts.googleapis.com/css?family=Roboto:300,400,500', rel='stylesheet')
+    // Stylesheets
+    //- link(href='/stylesheets/bootstrap.css', rel='stylesheet')
+    link(href='/stylesheets/ionicons.css', rel='stylesheet')
+    link(rel='stylesheet', href='/stylesheets/main-styles.css') 
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    
     link(href='/stylesheets/font-awesome.min.css', rel='stylesheet')
     link(href='/stylesheets/datepicker3.css', rel='stylesheet')
     link(href='/stylesheets/admin-styles.css', rel='stylesheet')
+    link(rel='stylesheet', href='/stylesheets/login.css')
+    
     // Custom Font
     link(href='https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i', rel='stylesheet')
-    //if lt IE 9
-      script(src='/javascripts/html5shiv.js')
-      script(src='/javascripts/respond.min.js')
+    
   body
-    nav.navbar.navbar-custom.navbar-fixed-top(role='navigation')
-      .container-fluid
-        .navbar-header
-          button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#sidebar-collapse')
-            span.sr-only Toggle navigation
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-          a.navbar-brand(href='#')
-            span iBanda
-            | Admin
-          ul.nav.navbar-top-links.navbar-right
-            li.dropdown
-              a.dropdown-toggle.count-info(data-toggle='dropdown', href='#')
-                em.fa.fa-bell
-                span.label.label-info 5
-              ul.dropdown-menu.dropdown-alerts
-                li
-                  a(href='#')
-                    div
-                      em.fa.fa-envelope
-                      |  1 New Message
-                      span.pull-right.text-muted.small 3 mins ago
-                li.divider
-                li
-                  a(href='#')
-                    div
-                      em.fa.fa-heart
-                      |  12 New Likes
-                      span.pull-right.text-muted.small 4 mins ago
-                li.divider
-                li
-                  a(href='#')
-                    div
-                      em.fa.fa-user
-                      |  5 Novos pedidos de registo
-                      span.pull-right.text-muted.small 4 mins ago
-      // /.container-fluid
+    header
+      nav.navbar2.navbar-custom.navbar-fixed-top(role='navigation')
+        .container-fluid.position-relative.no-side-padding.admin-nav
+          //- .navbar-header
+          a.logo2(href='/')
+              h3 iBanda
+          //-   img(src='/images/logo.png', alt='Logo Image')
+          .menu-nav-icon(data-nav-menu='#main-menu3')
+            i.ion-navicon
+          ul#main-menu3.main-menu3.visible-on-click
+            li
+              a(href='/') Início
+            li
+              a(href='#') Notícias
+            li
+              a(href='#') Eventos 
+            li
+              a(href='#') Obras
+                    
+          // main-menu
+          .menu-nav-icon(data-nav-menu='#main-menu2')
+            i.ion-navicon
+          ul#main-menu4.main-menu4.visible-on-click
+            li
+              if (testObj.loggedin)
+                a(href='/logout') logout
+              else
+                a(href='/login') login
+        //- .src-area
+        //-   form
+        //-     button.src-btn(type='submit')
+        //-       i.ion-ios-search-strong
+        //-     input.src-input(type='text', placeholder='Type of search')
+      // conatiner
+    //- -------
+    // /.sidebar
     #sidebar-collapse.col-sm-3.col-lg-2.sidebar
-      .profile-sidebar
-        .profile-userpic
-          img.img-responsive(src='http://placehold.it/50/30a5ff/fff', alt='')
-        .profile-usertitle
+      .profile-sidebar        
+        //- .profile-userpic
+        //-   img.img-responsive(src='http://placehold.it/50/30a5ff/fff', alt='')
+        center.profile-usertitle
           .profile-usertitle-name= testObj.username
-          .profile-usertitle-status
-            span.indicator.label-success
-            | Online
+          
         .clear
       .divider
-      form(role='search')
-        .form-group
-          input.form-control(type='text', placeholder='Search')
       ul.nav.menu
-        li.active
-          a(href='index.html')
-            em.fa.fa-dashboard  
-            | Dashboard
-        //- li
-        //-   a(href='widgets.html')
-        //-     em.fa.fa-calendar  
-        //-     |  Widgets
-        li
-          a(href='charts.html')
-            em.fa.fa-bar-chart  
-            |  Gráficos
+        - if(testObj.originalUrl === '/admin')
+            li.active
+              a(href='/admin') 
+                em.fa.fa-dashboard  
+                |  Dashboard 
+        - else
+            li
+              a(href='/admin') 
+                em.fa.fa-dashboard  
+                |  Dashboard 
+        - if(testObj.originalUrl === '/admin/estatisticas')
+            li.active
+              a(href='/admin/estatisticas')
+                em.fa.fa-bar-chart  
+                |  Gráficos
+        - else
+            li
+              a(href='/admin/estatisticas')
+                em.fa.fa-bar-chart  
+                |  Gráficos 
+        
+        - if(testObj.originalUrl === '/admin/utilizadores')
+            li.active
+              a(href='/admin/utilizadores')
+                em.fa.fa-users
+                |  Utilizadores
+        - else
+            li
+              a(href='/admin/utilizadores')
+                em.fa.fa-users
+                |  Utilizadores
+        - if(testObj.originalUrl === '/admin/obras')
+            li.active
+              a(href='/admin/obras')
+                em.fa.fa-music
+                |  Obras
+        - else
+            li
+              a(href='/admin/obras')
+                em.fa.fa-music
+                |  Obras
+        - if(testObj.originalUrl === '/admin/noticias')
+            li.active
+              a(href='/admin/noticias')
+                em.fa.fa-newspaper-o
+                |  Notícias
+        - else
+            li
+              a(href='/admin/noticias')
+                em.fa.fa-newspaper-o
+                |  Notícias
+        - if(testObj.originalUrl === '/admin/eventos')
+            li.active
+              a(href='/admin/eventos')
+                em.fa.fa-calendar
+                |  Eventos
+        - else
+            li
+              a(href='/admin/eventos')
+                em.fa.fa-calendar
+                |  Eventos
+
         //- li
         //-   a(href='elements.html')
         //-     em.fa.fa-toggle-off  
@@ -111,427 +162,28 @@ html
             em.fa.fa-power-off  
             |  Logout
     // /.sidebar
-    .col-sm-9.col-sm-offset-3.col-lg-10.col-lg-offset-2.main
-      .row
-        ol.breadcrumb
-          li
-            a(href='#')
-              em.fa.fa-home
-          li.active admin
-      // /.row
-      .row
-        .col-lg-12
-          h1.page-header Admin Dashboard
-      // /.row
-      .panel.panel-container
+    block content
+      block child
+
+        //- -------
+    // section
+    footer
+      .container
         .row
-          .col-xs-6.col-md-4.col-lg-4.no-padding
-            .panel.panel-teal.panel-widget.border-right
-              .row.no-padding
-                em.fa.fa-xl.fa-users.color-blue
-                .large= testObj.new_productors_num
-                .text-muted Novos Produtores
-          .col-xs-6.col-md-4.col-lg-4.no-padding
-            .panel.panel-orange.panel-widget.border-right
-              .row.no-padding
-                em.fa.fa-xl.fa-users.color-teal
-                .large= testObj.new_users_num
-                .text-muted Novos Utilizadores
-          .col-xs-6.col-md-4.col-lg-4.no-padding
-            .panel.panel-red.panel-widget
-              .row.no-padding
-                em.fa.fa-xl.fa-search.color-red
-                .large= testObj.page_views_num
-                .text-muted Consultas à página
-        // /.row
-      .row
-        .col-md-12
-          .panel.panel-default
-            .panel-heading
-              | Tráfego geral do site
-              ul.pull-right.panel-settings.panel-button-tab-right
-                li.dropdown
-                  a.pull-right.dropdown-toggle(data-toggle='dropdown', href='#')
-                    em.fa.fa-cogs
-                  ul.dropdown-menu.dropdown-menu-right
-                    li
-                      ul.dropdown-settings
-                        li
-                          a(href='#')
-                            em.fa.fa-cog
-                            |  Settings 1
-                        li.divider
-                        li
-                          a(href='#')
-                            em.fa.fa-cog
-                            |  Settings 2
-                        li.divider
-                        li
-                          a(href='#')
-                            em.fa.fa-cog
-                            |  Settings 3
-              span.pull-right.clickable.panel-toggle.panel-button-tab-left
-                em.fa.fa-toggle-up
-            .panel-body
-              .canvas-wrapper
-                canvas#lineChartDemo.main-chart(height='200', width='1000')
-      // /.row
-      .row
-        .col-xs-6.col-md-4
-          .panel.panel-default
-            .panel-body.easypiechart-panel
-              h4 Novos Produtores
-              #easypiechart-blue.easypiechart(data-percent=testObj.new_productors_percent)
-                span.percent= testObj.new_productors_percent + "%"
-        .col-xs-6.col-md-4
-          .panel.panel-default
-            .panel-body.easypiechart-panel
-              h4 Novos utilizadores
-              #easypiechart-teal.easypiechart(data-percent=testObj.new_users_percent)
-                span.percent= testObj.new_users_percent + "%"
-        .col-xs-6.col-md-4
-          .panel.panel-default
-            .panel-body.easypiechart-panel
-              h4 Consultas à página
-              #easypiechart-red.easypiechart(data-percent=testObj.page_views_percent)
-                span.percent= testObj.page_views_percent  + "%"   
-      // /.row
-      .row
-        .col-md-6
-        //-   .panel.panel-default.chat
-        //-     .panel-heading
-        //-       | Chat
-        //-       ul.pull-right.panel-settings.panel-button-tab-right
-        //-         li.dropdown
-        //-           a.pull-right.dropdown-toggle(data-toggle='dropdown', href='#')
-        //-             em.fa.fa-cogs
-        //-           ul.dropdown-menu.dropdown-menu-right
-        //-             li
-        //-               ul.dropdown-settings
-        //-                 li
-        //-                   a(href='#')
-        //-                     em.fa.fa-cog
-        //-                     |  Settings 1
-        //-                 li.divider
-        //-                 li
-        //-                   a(href='#')
-        //-                     em.fa.fa-cog
-        //-                     |  Settings 2
-        //-                 li.divider
-        //-                 li
-        //-                   a(href='#')
-        //-                     em.fa.fa-cog
-        //-                     |  Settings 3
-        //-       span.pull-right.clickable.panel-toggle.panel-button-tab-left
-        //-         em.fa.fa-toggle-up
-        //-     .panel-body
-        //-       ul
-        //-         li.left.clearfix
-        //-           span.chat-img.pull-left
-        //-             img.img-circle(src='http://placehold.it/60/30a5ff/fff', alt='User Avatar')
-        //-           .chat-body.clearfix
-        //-             .header
-        //-               strong.primary-font John Doe
-        //-               small.text-muted 32 mins ago
-        //-             p
-        //-               | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ante turpis, rutrum ut ullamcorper sed, dapibus ac nunc.
-        //-         li.right.clearfix
-        //-           span.chat-img.pull-right
-        //-             img.img-circle(src='http://placehold.it/60/dde0e6/5f6468', alt='User Avatar')
-        //-           .chat-body.clearfix
-        //-             .header
-        //-               strong.pull-left.primary-font Jane Doe
-        //-               small.text-muted 6 mins ago
-        //-             p
-        //-               | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ante turpis, rutrum ut ullamcorper sed, dapibus ac nunc.
-        //-         li.left.clearfix
-        //-           span.chat-img.pull-left
-        //-             img.img-circle(src='http://placehold.it/60/30a5ff/fff', alt='User Avatar')
-        //-           .chat-body.clearfix
-        //-             .header
-        //-               strong.primary-font John Doe
-        //-               small.text-muted 32 mins ago
-        //-             p
-        //-               | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ante turpis, rutrum ut ullamcorper sed, dapibus ac nunc.
-        //-     .panel-footer
-        //-       .input-group
-        //-         input#btn-input.form-control.input-md(type='text', placeholder='Type your message here...')
-        //-         span.input-group-btn
-        //-           button#btn-chat.btn.btn-primary.btn-md Send
-        //-   .panel.panel-default
-        //-     .panel-heading
-        //-       | To-do List
-        //-       ul.pull-right.panel-settings.panel-button-tab-right
-        //-         li.dropdown
-        //-           a.pull-right.dropdown-toggle(data-toggle='dropdown', href='#')
-        //-             em.fa.fa-cogs
-        //-           ul.dropdown-menu.dropdown-menu-right
-        //-             li
-        //-               ul.dropdown-settings
-        //-                 li
-        //-                   a(href='#')
-        //-                     em.fa.fa-cog
-        //-                     |  Settings 1
-        //-                 li.divider
-        //-                 li
-        //-                   a(href='#')
-        //-                     em.fa.fa-cog
-        //-                     |  Settings 2
-        //-                 li.divider
-        //-                 li
-        //-                   a(href='#')
-        //-                     em.fa.fa-cog
-        //-                     |  Settings 3
-        //-       span.pull-right.clickable.panel-toggle.panel-button-tab-left
-        //-         em.fa.fa-toggle-up
-        //-     .panel-body
-        //-       ul.todo-list
-        //-         li.todo-list-item
-        //-           .checkbox
-        //-             input#checkbox-1(type='checkbox')
-        //-             label(for='checkbox-1') Make coffee
-        //-           .pull-right.action-buttons
-        //-             a.trash(href='#')
-        //-               em.fa.fa-trash
-        //-         li.todo-list-item
-        //-           .checkbox
-        //-             input#checkbox-2(type='checkbox')
-        //-             label(for='checkbox-2') Check emails
-        //-           .pull-right.action-buttons
-        //-             a.trash(href='#')
-        //-               em.fa.fa-trash
-        //-         li.todo-list-item
-        //-           .checkbox
-        //-             input#checkbox-3(type='checkbox')
-        //-             label(for='checkbox-3') Reply to Jane
-        //-           .pull-right.action-buttons
-        //-             a.trash(href='#')
-        //-               em.fa.fa-trash
-        //-         li.todo-list-item
-        //-           .checkbox
-        //-             input#checkbox-4(type='checkbox')
-        //-             label(for='checkbox-4') Make more coffee
-        //-           .pull-right.action-buttons
-        //-             a.trash(href='#')
-        //-               em.fa.fa-trash
-        //-         li.todo-list-item
-        //-           .checkbox
-        //-             input#checkbox-5(type='checkbox')
-        //-             label(for='checkbox-5') Work on the new design
-        //-           .pull-right.action-buttons
-        //-             a.trash(href='#')
-        //-               em.fa.fa-trash
-        //-         li.todo-list-item
-        //-           .checkbox
-        //-             input#checkbox-6(type='checkbox')
-        //-             label(for='checkbox-6') Get feedback on design
-        //-           .pull-right.action-buttons
-        //-             a.trash(href='#')
-        //-               em.fa.fa-trash
-        //-     .panel-footer
-        //-       .input-group
-        //-         input#btn-input.form-control.input-md(type='text', placeholder='Add new task')
-        //-         span.input-group-btn
-        //-           button#btn-todo.btn.btn-primary.btn-md Add
-        // /.col
-        //- .col-md-12
-          .panel.panel-default
-            .panel-heading
-              | Timeline
-              ul.pull-right.panel-settings.panel-button-tab-right
-                li.dropdown
-                  a.pull-right.dropdown-toggle(data-toggle='dropdown', href='#')
-                    em.fa.fa-cogs
-                  ul.dropdown-menu.dropdown-menu-right
-                    li
-                      ul.dropdown-settings
-                        li
-                          a(href='#')
-                            em.fa.fa-cog
-                            |  Settings 1
-                        li.divider
-                        li
-                          a(href='#')
-                            em.fa.fa-cog
-                            |  Settings 2
-                        li.divider
-                        li
-                          a(href='#')
-                            em.fa.fa-cog
-                            |  Settings 3
-              span.pull-right.clickable.panel-toggle.panel-button-tab-left
-                em.fa.fa-toggle-up
-            .panel-body.timeline-container
-              ul.timeline
-                li
-                  .timeline-badge
-                    em.glyphicon.glyphicon-pushpin
-                  .timeline-panel
-                    .timeline-heading
-                      h4.timeline-title Lorem ipsum dolor sit amet
-                    .timeline-body
-                      p
-                        | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at sodales nisl. Donec malesuada orci ornare risus finibus feugiat.
-                li
-                  .timeline-badge.primary
-                    em.glyphicon.glyphicon-link
-                  .timeline-panel
-                    .timeline-heading
-                      h4.timeline-title Lorem ipsum dolor sit amet
-                    .timeline-body
-                      p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                li
-                  .timeline-badge
-                    em.glyphicon.glyphicon-camera
-                  .timeline-panel
-                    .timeline-heading
-                      h4.timeline-title Lorem ipsum dolor sit amet
-                    .timeline-body
-                      p
-                        | Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at sodales nisl. Donec malesuada orci ornare risus finibus feugiat.
-                li
-                  .timeline-badge
-                    em.glyphicon.glyphicon-paperclip
-                  .timeline-panel
-                    .timeline-heading
-                      h4.timeline-title Lorem ipsum dolor sit amet
-                    .timeline-body
-                      p Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        // /.col
-        .col-sm-12
-          p.back-link
-            | iBanda Theme by 
-            a(href='https://www.medialoot.com') Medialoot
-      // /.row
-      // /.main
-      script(type='text/javascript', src='/javascripts/jquery-1.11.1.min.js')
-      script(type='text/javascript', src='/javascripts/bootstrap.min.js')
-      script(type='text/javascript', src='/javascripts/chart.min.js')      
-      script(type='text/javascript', src='/javascripts/easypiechart.js')
-      script(type='text/javascript', src='/javascripts/easypiechart-data.js')
-      script(type='text/javascript', src='/javascripts/bootstrap-datepicker.js')
-      script(src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js')
-      script(src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js')
-      script(src='https://github.com/nagix/chartjs-plugin-streaming/releases/download/v1.5.0/chartjs-plugin-streaming.min.js')
+          .col-sm-12
+              
+              p.back-link 
+                | iBanda @ 2019. All rights reserved. Designed by 
+                a(href='https://colorlib.com', target='_blank') Colorlib
+          // footer-section
+          // col-lg-4 col-md-6
 
+    // SCIPTS
 
-      script.
-        var testObj = !{chart_data};
-        
-
-        //- window.onload = function () {
-        //-     var ctxl = $("#lineChartDemo").get(0).getContext("2d");		
-        //-     var lineChart = new Chart(ctxl).Line(testObj.data, {
-        //-     responsive: true,
-        //-     scaleLineColor: "rgba(0,0,0,.2)",
-        //-     scaleGridLineColor: "rgba(0,0,0,.05)",
-        //-     scaleFontColor: "#c5c7cc"
-        //-     });
-
-        //- //- var chart1 = document.getElementById("lineChartDemo").getContext("2d");
-        //- //- window.myLine = new Chart(chart1).Line(lineChartData, {
-        //- //- responsive: true,
-        //- //- scaleLineColor: "rgba(0,0,0,.2)",
-        //- //- scaleGridLineColor: "rgba(0,0,0,.05)",
-        //- //- scaleFontColor: "#c5c7cc"
-        //- //- });
-        //- };
-
-        function onRefresh(chart) {
-            chart.config.data.datasets.forEach(function(dataset) {
-                dataset.data.push({
-                    x: Date.now(),
-                    y: 132
-                });
-            });
-        }
-
-        var config = {
-            type: 'line',
-            scaleLineColor: "rgba(0,0,0,.2)",
-            scaleGridLineColor: "rgba(0,0,0,.05)",
-            scaleFontColor: "#c5c7cc",
-            responsive: true,
-            data: {
-                labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
-                datasets: [
-                    {
-                        label: "Pedidos GET",
-                        fill: true,
-                        backgroundColor: "rgba(220,220,220,0.2)",
-                        borderColor: "rgba(220,220,220,1)",
-                        pointColor : "rgba(220,220,220,1)",
-                        pointStrokeColor : "#fff",
-                        pointHighlightFill : "#fff",
-                        pointHighlightStroke : "rgba(220,220,220,1)",
-                        data: testObj.get_info
-                    },
-                    {
-                        label: "Pedidos POST",
-                        fill: true,
-                        backgroundColor: "rgba(48, 164, 255, 0.2)",
-                        borderColor: "rgba(48, 164, 255, 1)",
-                        pointColor : "rgba(48, 164, 255, 1)",
-                        pointStrokeColor : "#fff",
-                        pointHighlightFill : "#fff",
-                        pointHighlightStroke : "rgba(48, 164, 255, 1)",
-                        data: testObj.post_info
-                    }
-                ]
-            },        
-            options: {
-                //- title: {
-                //- 	display: true,
-                //- 	text: 'Line chart (hotizontal scroll) sample'
-                //- },
-                scales: {                    
-                    xAxes: [{
-                        //- type: 'realtime',
-                        realtime: {
-                            duration: 20000,
-                            refresh: 1000,
-                            delay: 2000,
-                            onRefresh: onRefresh
-                        }
-                    }],
-                    yAxes: [{
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Número de pedidos'
-                        }
-                    }]
-                },
-                tooltips: {
-                    mode: 'nearest',
-                    intersect: false
-                },
-                hover: {
-                    mode: 'nearest',
-                    intersect: false
-                }
-            }
-        };
-
-        window.onload = function() {
-            var ctxl = $("#lineChartDemo").get(0).getContext("2d");					
-            window.myChart = new Chart(ctxl, config);
-        };
-        
-
-
-        var ctxl = $("#lineChartDemo").get(0).getContext("2d");		
-        var myChart = new Chart(ctxl, config);
-
-        // your event listener code - assuming the event object has the timestamp and value properties
-        function onReceive(event) {
-
-            // append the new data to the existing chart data
-            myChart.data.datasets[0].data.push(testObj.data);
-
-            // update chart datasets keeping the current animation
-            myChart.update({
-                preservation: true
-            });
-        }
-
-
+    script(src='/javascripts/jquery-1.11.1.min.js')
+    script(src='/javascripts/bootstrap.min.js')
+    script(src='/javascripts/chart.min.js')    
+    script(src='/javascripts/easypiechart.js')
+    script(src='/javascripts/easypiechart-data.js')
+    script(src='/javascripts/bootstrap-datepicker.js')
+    script(src='/javascripts/custom.js')

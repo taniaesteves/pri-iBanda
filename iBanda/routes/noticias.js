@@ -17,7 +17,7 @@ router.get('/criar-noticia', function(req, res) {
 });
 
 router.post('/', function(req, res) {
-    axios.get('http://localhost:3000/api/users/user/email/' + req.session.email, { headers: { "Authorization": 'Bearer ' + req.session.token } })
+    axios.get('http://localhost:3000/api/users/user/username/' + req.session.username, { headers: { "Authorization": 'Bearer ' + req.session.token } })
     .then(user => {
         var params = {
             titulo: req.body.titulo, pretitulo: req.body.pretitulo,

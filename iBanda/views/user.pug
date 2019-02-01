@@ -1,24 +1,28 @@
 extends layout
 block content
     link(rel='stylesheet', type='text/css', href='//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css')
-    .w3-container
-        br
-        center.h2.w3-teal= user.name
-        br
-        table.table.table-striped
-                tr
-                    th(scope='col') Nome
-                    td(scope='row')= user.name 
+    link(rel='stylesheet', href='/stylesheets/main-styles.css')    
+    link(href='/stylesheets/responsive.css', rel='stylesheet')
+    section.blog-area.section
+        .container.bootstrap.snippet
+            center.h2.w3-teal=user.name
+            br
+            .row
+                .col-lg-12
+                    table.table.table-striped
+                            tr
+                                th Nome
+                                td(scope='row' style='text-align: left;')= user.name 
 
-                tr
-                    th(scope='col') Username
-                    td(scope='row')= user.username
-                        
-                tr
-                    th(scope='col') Email
-                    td(scope='row')= user.email
-        br
-        a.table-link(href="/users/").h5
-                span.fa-stack
-                    i.fa.fa-square.fa-stack-2x
-                    i.fa.fa-pencil.fa-stack-1x.fa-inverse
+                            tr
+                                th(scope='col') Username
+                                td(scope='row' style='text-align: left;')= user.username
+                                    
+                            tr
+                                th(scope='col') Email
+                                td(scope='row' style='text-align: left;')= user.email
+                    br
+                    a.table-link(href="/users/").h5
+                            span.fa-stack
+                                i.fa.fa-square.fa-stack-2x
+                                i.fa.fa-pencil.fa-stack-1x.fa-inverse

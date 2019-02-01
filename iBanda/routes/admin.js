@@ -101,9 +101,70 @@ router.get('/role/:role', (req, res) => {
 
 // });
 
-router.get('/', (req, res) => {
+router.get('/noticias', (req, res) => {
+	req.session.redirectTo = "/admin/noticias";
+	axios.get('http://localhost:3000/api/noticias/', { headers: { "Authorization": 'Bearer ' + req.session.token } })
+		.then(response => {
+			if (req.session.email) {
+				loggedin = true;
+			} else loggedin = false;
+			testObj = {
+				originalUrl: req.originalUrl,
+				loggedin,
+				username: req.session.username,
+				noticias: response.data
+			}
+			res.render('adminNoticias', testObj)
+		}).catch(erro => {
+			if (erro.response) {
+				if (erro.response.status == 401) return res.redirect('/login')
+				console.log('Erro get /admin/noticias por: ' + erro.response.data.info)
+			}
+			res.render('error', { error: erro, message: "Erro na listagem dos utilizadores por role!" })
+		})
+})
 
-	console.log(req.session.token)
+router.get('/ocultar/noticia/:nid', (req, res) => {
+	req.session.redirectTo = "/admin/noticias";
+	axios.get('http://localhost:3000/api/admin/ocultar/noticia/' + req.params.nid, { headers: { "Authorization": 'Bearer ' + req.session.token } })
+		.then(response => {
+			res.redirect('/admin/noticias')
+			// res.render('adminNoticias', testObj)
+		}).catch(erro => {
+			if (erro.response) {
+				if (erro.response.status == 401) return res.redirect('/login')
+				console.log('Erro get /admin/ocultar/noticia por: ' + erro.response.data.info)
+			}
+			res.render('error', { error: erro, message: "Erro na listagem dos utilizadores por role!" })
+		})
+})
+
+router.get('/utilizadores', (req, res) => {
+	req.session.redirectTo = "/admin/utilizadores";
+	axios.get('http://localhost:3000/api/users/', { headers: { "Authorization": 'Bearer ' + req.session.token } })
+		.then(response => {
+			if (req.session.email) {
+				loggedin = true;
+			} else loggedin = false;
+			testObj = {
+				originalUrl: req.originalUrl,
+				loggedin,
+				username: req.session.username,
+				users: response.data
+			}
+			res.render('adminUsers', testObj)
+		}).catch(erro => {
+			if (erro.response) {
+				if (erro.response.status == 401) return res.redirect('/login')
+				console.log('Erro get /admin por: ' + erro.response.data.info)
+			}
+			res.render('error', { error: erro, message: "Erro na listagem dos utilizadores por role!" })
+		})
+})
+
+router.get('/', (req, res) => {
+	req.session.redirectTo = "/admin/";
+	
 	// if (req.session.token) {
 	// 	jwt.verify(req.session.token, 'iBandaSecret2', function(err, decoded) {      
 	// 	  if (err) {			  
@@ -113,23 +174,27 @@ router.get('/', (req, res) => {
 	// 		console.log("user id= " + JSON.stringify(decoded.user.id));			
 	// 	  }
 	// 	})
-	// }
-	// axios.get('http://localhost:3000/api/admin/user/id/'+user_id, { headers: { "Authorization": 'Bearer ' + req.session.token } 
-	// }).then (username => {
+	// }	
+	console.log(req.session)
 	axios.get('http://localhost:3000/api/admin/stats', { headers: { "Authorization": 'Bearer ' + req.session.token } })
 		.then(response => {
-
+			if (req.session.email) {
+				loggedin = true;
+			} else loggedin = false;
 			testObj = {
+
+				originalUrl: req.originalUrl,
+				loggedin,
 				page_views_num: "25.2k",
 				page_views_percent: 24,
 				new_productors_num: "50",
 				new_productors_percent: 83,
 				new_users_percent: 48,
 				new_users_num: 30,
-				username: "to do!!!",
+				username: req.session.username,
 				chart_data: JSON.stringify({ get_info: response.data.get_info, post_info: response.data.post_info })
 			}
-			res.render('layout_admin', testObj)
+			res.render('adminDashboard', testObj)
 		}).catch(erro => {
 			if (erro.response) {
 				if (erro.response.status == 401) return res.redirect('/login')
@@ -138,7 +203,5 @@ router.get('/', (req, res) => {
 			res.render('error', { error: erro, message: "Erro na listagem dos utilizadores por role!" })
 		})
 })
-// });
-
 
 module.exports = router;
