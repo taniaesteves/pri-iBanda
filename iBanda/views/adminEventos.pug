@@ -9,7 +9,7 @@ block content
         .main-box.no-header.clearfix
           .main-box-body.clearfix
             .table-responsive
-              table.table.user-list#users
+              table.table.user-list#noticias
                 thead
                   tr
                     th(onclick='sortTable(0)')
@@ -17,33 +17,33 @@ block content
                         b Tipo
                     th(onclick='sortTable(0)')
                       span 
-                        b Username
+                        b Data
                     th(onclick='sortTable(0)')
                       span 
-                        b Nome
+                        b Designação
                     th(onclick='sortTable(0)')
                       span 
-                        b Email
+                        b Local
                     th
                       span 
                         b Editar
                 tbody
-                  each user in testObj.users
-                    tr
-                      td= user.role                                            
-                      td= user.username
-                      td= user.name
-                      td= user.email
-                      td(style='width: 20%;')
-                        a.table-link(href='#')
+                  each evento in testObj.eventos                    
+                    tr                      
+                      td("width: 15%;")= evento.tipo
+                      td("width: 10%;")= evento.data
+                      td= evento.designacao
+                      td= evento.local
+                      td("width: 10%;")
+                        a.table-link(href='/admin/ocultar/noticia/' + evento._id)
                           span.fa-stack
                             i.fa.fa-square.fa-stack-2x
-                            i.fa.fa-search-plus.fa-stack-1x.fa-inverse
-                        a.table-link(href='#')
+                            i.fa.fa-eye.fa-stack-1x.fa-inverse
+                        a.table-link(href='/admin/editar/noticia/' + evento._id)
                           span.fa-stack
                             i.fa.fa-square.fa-stack-2x
                             i.fa.fa-pencil.fa-stack-1x.fa-inverse
-                        a.table-link.danger(href='#')
+                        a.table-link.danger(href='/admin/delete/noticia/' + evento._id)
                           span.fa-stack
                             i.fa.fa-square.fa-stack-2x
                             i.fa.fa-trash-o.fa-stack-1x.fa-inverse
@@ -52,9 +52,13 @@ block content
     hr
     script(src='/javascripts/jquery-1.11.1.min.js')
     script.
+
+        $("#button").click(function(){ 
+            $("#go").css("background-color","yellow");
+        });
         function sortTable(n) {
             var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-            table = document.getElementById("users");
+            table = document.getElementById("noticias");
             switching = true;
             dir = "asc";
             while (switching) {

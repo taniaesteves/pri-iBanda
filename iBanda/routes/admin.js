@@ -162,6 +162,112 @@ router.get('/utilizadores', (req, res) => {
 		})
 })
 
+
+router.get('/obras', (req, res) => {
+	req.session.redirectTo = "/admin/utilizadores";
+	axios.get('http://localhost:3000/api/obras/', { headers: { "Authorization": 'Bearer ' + req.session.token } })
+		.then(response => {
+			if (req.session.email) {
+				loggedin = true;
+			} else loggedin = false;
+			testObj = {
+				originalUrl: req.originalUrl,
+				loggedin,
+				username: req.session.username,
+				obras: response.data
+			}
+			res.render('adminObras', testObj)
+		}).catch(erro => {
+			if (erro.response) {
+				if (erro.response.status == 401) return res.redirect('/login')
+				console.log('Erro get /admin por: ' + erro.response.data.info)
+			}
+			res.render('error', { error: erro, message: "Erro na listagem dos utilizadores por role!" })
+		})
+})
+
+router.get('/eventos', (req, res) => {
+	req.session.redirectTo = "/admin/utilizadores";
+	axios.get('http://localhost:3000/api/eventos/', { headers: { "Authorization": 'Bearer ' + req.session.token } })
+		.then(response => {
+			if (req.session.email) {
+				loggedin = true;
+			} else loggedin = false;
+			testObj = {
+				originalUrl: req.originalUrl,
+				loggedin,
+				username: req.session.username,
+				eventos: response.data
+				// calendar_events: JSON.stringify(
+				// 	[
+				// 		{
+				// 			title: 'All Day Event',
+				// 			start: '2019-02-01'
+				// 		},
+				// 		{
+				// 			title: 'Long Event',
+				// 			start: '2019-02-07',
+				// 			end: '2019-02-10'
+				// 		},
+				// 		{
+				// 			id: 999,
+				// 			title: 'Repeating Event',
+				// 			start: '2019-02-09T16:00:00'
+				// 		},
+				// 		{
+				// 			id: 999,
+				// 			title: 'Repeating Event',
+				// 			start: '2019-02-16T16:00:00'
+				// 		},
+				// 		{
+				// 			title: 'Conference',
+				// 			start: '2019-02-11',
+				// 			end: '2019-02-13'
+				// 		},
+				// 		{
+				// 			title: 'Meeting',
+				// 			start: '2019-02-12T10:30:00',
+				// 			end: '2019-02-12T12:30:00'
+				// 		},
+				// 		{
+				// 			title: 'Lunch',
+				// 			start: '2019-02-12T12:00:00'
+				// 		},
+				// 		{
+				// 			title: 'Meeting',
+				// 			start: '2019-02-12T14:30:00'
+				// 		},
+				// 		{
+				// 			title: 'Happy Hour',
+				// 			start: '2019-02-12T17:30:00'
+				// 		},
+				// 		{
+				// 			title: 'Dinner',
+				// 			start: '2019-02-12T20:00:00'
+				// 		},
+				// 		{
+				// 			title: 'Birthday Party',
+				// 			start: '2019-02-13T07:00:00'
+				// 		},
+				// 		{
+				// 			title: 'Click for Google',
+				// 			url: 'https://google.com/',
+				// 			start: '2019-02-28'
+				// 		}
+				// 	]
+				// )
+			}
+			res.render('adminEventos', testObj)
+		}).catch(erro => {
+			if (erro.response) {
+				if (erro.response.status == 401) return res.redirect('/login')
+				console.log('Erro get /admin por: ' + erro.response.data.info)
+			}
+			res.render('error', { error: erro, message: "Erro na listagem dos utilizadores por role!" })
+		})
+})
+
+
 router.get('/', (req, res) => {
 	req.session.redirectTo = "/admin/";
 	
@@ -181,16 +287,13 @@ router.get('/', (req, res) => {
 			if (req.session.email) {
 				loggedin = true;
 			} else loggedin = false;
-			testObj = {
-
+			console.log(response.data)
+			testObj = {				
 				originalUrl: req.originalUrl,
 				loggedin,
-				page_views_num: "25.2k",
-				page_views_percent: 24,
-				new_productors_num: "50",
-				new_productors_percent: 83,
-				new_users_percent: 48,
-				new_users_num: 30,
+				page_views_num: page_views,
+				new_productors_num: response.data.new_produtores,								
+				new_users_num: response.data.new_users,
 				username: req.session.username,
 				chart_data: JSON.stringify({ get_info: response.data.get_info, post_info: response.data.post_info })
 			}

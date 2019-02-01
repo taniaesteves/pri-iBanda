@@ -9,31 +9,27 @@ block content
         .main-box.no-header.clearfix
           .main-box-body.clearfix
             .table-responsive
-              table.table.user-list#users
+              table.table.obra-list#obras
                 thead
                   tr
-                    th(onclick='sortTable(0)')
+                    th(onclick='sortTable(1)')
+                      span 
+                        b Título
+                    th(onclick='sortTable(2)')
                       span 
                         b Tipo
-                    th(onclick='sortTable(0)')
+                    th(onclick='sortTable(3)')
                       span 
-                        b Username
-                    th(onclick='sortTable(0)')
-                      span 
-                        b Nome
-                    th(onclick='sortTable(0)')
-                      span 
-                        b Email
+                        b Compositor
                     th
                       span 
                         b Editar
                 tbody
-                  each user in testObj.users
+                  each obra in testObj.obras
                     tr
-                      td= user.role                                            
-                      td= user.username
-                      td= user.name
-                      td= user.email
+                      td= obra.titulo                                            
+                      td= obra.tipo
+                      td= obra.compositor                      
                       td(style='width: 20%;')
                         a.table-link(href='#')
                           span.fa-stack
@@ -54,7 +50,7 @@ block content
     script.
         function sortTable(n) {
             var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-            table = document.getElementById("users");
+            table = document.getElementById("obras");
             switching = true;
             dir = "asc";
             while (switching) {

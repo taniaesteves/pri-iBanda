@@ -19,6 +19,7 @@ const addRequestId = require('express-request-id')();
 
 require('./authentication/aut')
 
+var obrasAPIRouter = require('./routes/api/obras');
 var eventosAPIRouter = require('./routes/api/eventos');
 var noticiasAPIRouter = require('./routes/api/noticias');
 var usersAPIRouter = require('./routes/api/users');
@@ -113,6 +114,7 @@ app.use('/api/eventos', eventosAPIRouter)
 app.use('/api/noticias', noticiasAPIRouter)
 app.use('/api/users', usersAPIRouter)
 app.use('/api/admin', adminAPIRouter)
+app.use('/api/obras', obrasAPIRouter)
 
 
 
